@@ -1,8 +1,8 @@
-/* OnboardingPage.css - Marrakech Red Theme */
+/* OnboardingPage.css - Marrakech-Safi Blanc & Bleu Foncé */
 
 .onboarding-container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #fef2f2 0%, #fff7ed 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
     display: flex;
     flex-direction: column;
     padding: 2rem;
@@ -19,21 +19,21 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    color: #dc2626;
+    color: var(--primary);
 }
 
 .onboarding-logo h1 {
     font-size: 2rem;
     font-weight: 800;
-    color: #1e293b;
+    color: var(--text-main);
 }
 
 .skip-btn {
     background: transparent;
-    border: 1px solid #e2e8f0;
-    color: #64748b;
+    border: 2px solid rgba(26, 58, 82, 0.15);
+    color: var(--text-muted);
     padding: 0.75rem 1.5rem;
-    border-radius: 12px;
+    border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
@@ -41,8 +41,8 @@
 
 .skip-btn:hover {
     background: white;
-    border-color: #dc2626;
-    color: #dc2626;
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
 .onboarding-content {
@@ -58,22 +58,22 @@
 .progress-bar {
     width: 100%;
     height: 8px;
-    background: #e2e8f0;
-    border-radius: 99px;
+    background: rgba(26, 58, 82, 0.1);
+    border-radius: 50px;
     overflow: hidden;
     margin-bottom: 0.75rem;
 }
 
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #dc2626 0%, #d97706 100%);
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 99px;
+    background: var(--primary);
+    transition: width 0.4s ease;
+    border-radius: 50px;
 }
 
 .progress-text {
     text-align: center;
-    color: #64748b;
+    color: var(--text-muted);
     font-weight: 600;
     font-size: 0.95rem;
 }
@@ -86,21 +86,22 @@
 .instruction-text h2 {
     font-size: 2rem;
     font-weight: 800;
-    color: #1e293b;
+    color: var(--text-main);
     margin-bottom: 0.75rem;
 }
 
 .instruction-text p {
-    color: #64748b;
+    color: var(--text-muted);
     font-size: 1.1rem;
 }
 
 .attraction-showcase {
     background: white;
-    border-radius: 24px;
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(220, 38, 38, 0.08);
+    box-shadow: 0 10px 40px rgba(26, 58, 82, 0.15);
     margin-bottom: 2rem;
+    border: 2px solid rgba(26, 58, 82, 0.1);
 }
 
 .attraction-image-wrapper {
@@ -126,7 +127,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    background: linear-gradient(to top, rgba(26, 58, 82, 0.9), transparent);
     padding: 2rem;
     color: white;
 }
@@ -138,9 +139,9 @@
 }
 
 .attraction-category {
-    background: rgba(220, 38, 38, 0.9);
+    background: var(--primary);
     padding: 0.4rem 1rem;
-    border-radius: 99px;
+    border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 700;
     display: inline-block;
@@ -162,37 +163,29 @@
     background: none;
     border: none;
     cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s;
     padding: 0.5rem;
-    border-radius: 12px;
+    border-radius: 10px;
 }
 
 .star-btn:hover {
-    transform: scale(1.15) rotate(-5deg);
+    transform: scale(1.15);
 }
 
 .star-btn.active {
-    animation: starPop 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: starPop 0.3s ease;
 }
 
 @keyframes starPop {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.3) rotate(10deg);
-    }
-
-    100% {
-        transform: scale(1);
-    }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
 }
 
 .rating-label {
     font-size: 1.25rem;
     font-weight: 700;
-    color: #dc2626;
+    color: var(--primary);
     min-height: 1.75rem;
 }
 
@@ -203,25 +196,26 @@
 
 .next-btn,
 .finish-btn {
-    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+    background: var(--primary);
     color: white;
     border: none;
     padding: 1.25rem 3rem;
-    border-radius: 16px;
+    border-radius: 12px;
     font-size: 1.125rem;
     font-weight: 700;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
+    transition: all 0.3s;
+    box-shadow: 0 6px 20px rgba(26, 58, 82, 0.25);
 }
 
 .next-btn:hover:not(:disabled),
 .finish-btn:hover:not(:disabled) {
     transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(220, 38, 38, 0.4);
+    box-shadow: 0 10px 30px rgba(26, 58, 82, 0.35);
+    background: var(--primary-dark);
 }
 
 .next-btn:disabled,
@@ -231,16 +225,6 @@
     transform: none;
 }
 
-.finish-btn {
-    background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
-    box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
-}
-
-.finish-btn:hover:not(:disabled) {
-    box-shadow: 0 15px 40px rgba(124, 58, 237, 0.4);
-}
-
-/* Loading & Error States */
 .onboarding-loading,
 .onboarding-error {
     min-height: 100vh;
@@ -254,34 +238,31 @@
 .spinner {
     width: 60px;
     height: 60px;
-    border: 4px solid #fee2e2;
-    border-top-color: #dc2626;
+    border: 4px solid #f8f9fa;
+    border-top-color: var(--primary);
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+    to { transform: rotate(360deg); }
 }
 
 .onboarding-error h2 {
     font-size: 2rem;
-    color: #1e293b;
+    color: var(--text-main);
 }
 
 .onboarding-error button {
-    background: #dc2626;
+    background: var(--primary);
     color: white;
     border: none;
     padding: 1rem 2rem;
-    border-radius: 12px;
+    border-radius: 10px;
     font-weight: 700;
     cursor: pointer;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .onboarding-container {
         padding: 1rem;

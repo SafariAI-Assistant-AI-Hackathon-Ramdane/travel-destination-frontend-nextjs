@@ -15,6 +15,8 @@ export interface DestinationPayload {
   imageUrl: string;
   matchScore: number;
   price?: string;
+  latitude?: number;
+  longitude?: number;
 }
 
 export interface GuidePayload {
@@ -130,6 +132,8 @@ export function buildDestinationPayloads(
       imageUrl: buildAttractionImageUrl(attr),
       matchScore: computeMatchScore(attr, userPrefs),
       price: attr.price || undefined,
+      latitude: attr.latitude ? parseFloat(attr.latitude) : undefined,
+      longitude: attr.longitude ? parseFloat(attr.longitude) : undefined,
     },
   }));
 }

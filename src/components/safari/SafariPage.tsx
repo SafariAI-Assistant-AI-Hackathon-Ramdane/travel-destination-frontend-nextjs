@@ -6,21 +6,37 @@ import { CardPayload } from '../../lib/cardPayloadBuilder';
 
 const SafariPage: React.FC = () => {
   const injectRef = useRef<((cards: CardPayload[], text: string) => void) | null>(null);
+  const sendMessageRef = useRef<((text: string) => void) | null>(null);
   const themeRef = useRef<'dark' | 'light'>('dark');
   const [lang, setLang] = useState<Lang>('fr');
   const [themeState, setThemeState] = useState<'dark' | 'light'>('dark');
 
+  // Initialize theme on mount
+  React.useEffect(() => {
+    document.documentElement.setAttribute('data-theme', themeState);
+  }, []);
+
   const registerInject = useCallback((fn: (cards: CardPayload[], text: string) => void) => {
     injectRef.current = fn;
+  }, []);
+
+  const registerSendMessage = useCallback((fn: (text: string) => void) => {
+    sendMessageRef.current = fn;
   }, []);
 
   const handleInjectCards = useCallback((cards: CardPayload[], text: string) => {
     injectRef.current?.(cards, text);
   }, []);
 
-  const handleThemeToggle = useCallback(() => {
-    setThemeState((t) => (t === 'dark' ? 'light' : 'dark'));
+  const handleSendMessage = useCallback((text: string) => {
+    sendMessageRef.current?.(text);
   }, []);
+
+  const handleThemeToggle = useCallback(() => {
+    const newTheme = themeState === 'dark' ? 'light' : 'dark';
+    setThemeState(newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+  }, [themeState]);
 
   return (
     <div className={`safari-page ${lang === 'ar' ? 'safari-rtl' : ''}`} data-theme={themeState}>
@@ -32,11 +48,12 @@ const SafariPage: React.FC = () => {
       <div className="safari-layout">
         {/* Sidebar on LEFT for FR/EN (before chat), on RIGHT for AR (after chat) */}
         {lang !== 'ar' && (
-          <SafariSidebar onInjectCards={handleInjectCards} lang={lang} />
+          <SafariSidebar onInjectCards={handleInjectCards} onSendMessage={handleSendMessage} lang={lang} />
         )}
 
         <SafariChat
           onInjectCards={registerInject}
+          onSendMessage={registerSendMessage}
           themeRef={themeRef}
           lang={lang}
           onLangChange={setLang}
@@ -44,7 +61,7 @@ const SafariPage: React.FC = () => {
         />
 
         {lang === 'ar' && (
-          <SafariSidebar onInjectCards={handleInjectCards} lang={lang} />
+          <SafariSidebar onInjectCards={handleInjectCards} onSendMessage={handleSendMessage} lang={lang} />
         )}
       </div>
     </div>

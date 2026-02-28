@@ -1,39 +1,47 @@
-/* AttractionCard.css — Safari AI Dark Glassmorphism Theme */
+/* AttractionCard.css — Marrakech-Safi Blanc & Bleu Foncé */
 
 .attraction-card {
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 20px;
+    background: #ffffff;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 20px rgba(26, 58, 82, 0.12);
+    transition: all 0.3s ease;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     height: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(26, 58, 82, 0.1);
     position: relative;
-    isolation: isolate;
-    backdrop-filter: blur(8px);
+}
+
+.attraction-card::before {
+    content: '🌴';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 1.5rem;
+    opacity: 0.1;
+    z-index: 0;
 }
 
 .attraction-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 20px 40px rgba(67, 97, 238, 0.2);
-    border-color: rgba(67, 97, 238, 0.3);
+    box-shadow: 0 12px 35px rgba(26, 58, 82, 0.2);
+    border-color: var(--primary);
 }
 
 .attraction-image-container {
     position: relative;
     height: 240px;
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.02);
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
 }
 
 .attraction-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: transform 0.5s ease;
 }
 
 .attraction-card:hover .attraction-image {
@@ -44,58 +52,37 @@
     position: absolute;
     top: 16px;
     right: 16px;
-    background: rgba(10, 15, 30, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    padding: 6px 10px;
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 6px 12px;
+    border-radius: 8px;
     font-weight: 700;
-    color: #ffd166;
+    color: var(--primary);
     font-size: 0.85rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(26, 58, 82, 0.15);
     display: flex;
     align-items: center;
     gap: 4px;
     z-index: 2;
-    border: 1px solid rgba(255, 209, 102, 0.2);
+    border: 2px solid var(--primary);
+}
+
+.attraction-rating::before {
+    content: '★';
+    color: var(--accent-gold);
 }
 
 .preference-badge {
     position: absolute;
     top: 16px;
     left: 16px;
-    background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+    background: var(--primary);
     color: white;
     padding: 6px 12px;
-    border-radius: 99px;
+    border-radius: 20px;
     font-weight: 700;
     font-size: 0.75rem;
-    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.4);
+    box-shadow: 0 4px 15px rgba(26, 58, 82, 0.3);
     z-index: 2;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    animation: shine 2s infinite;
-}
-
-@keyframes shine {
-    0% {
-        filter: brightness(1);
-    }
-
-    50% {
-        filter: brightness(1.2);
-    }
-
-    100% {
-        filter: brightness(1);
-    }
-}
-
-.attraction-rating::before {
-    content: '★';
-    color: #ffd166;
 }
 
 .attraction-content {
@@ -103,35 +90,33 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    background: white;
 }
 
 .attraction-type {
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 1.2px;
-    color: #4361ee;
+    color: var(--primary);
     font-weight: 700;
     margin-bottom: 0.5rem;
-    display: inline-block;
 }
 
 .attraction-title {
     font-size: 1.25rem;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--text-main);
     margin: 0 0 0.5rem 0;
     line-height: 1.35;
-    letter-spacing: -0.01em;
 }
 
 .attraction-card:hover .attraction-title {
-    color: #4361ee;
-    transition: color 0.2s ease;
+    color: var(--primary);
 }
 
 .attraction-address {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--text-muted);
     margin-bottom: auto;
     display: flex;
     align-items: baseline;
@@ -142,7 +127,7 @@
 .attraction-footer {
     margin-top: 1.25rem;
     padding-top: 1.25rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 2px solid rgba(26, 58, 82, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -150,16 +135,16 @@
 
 .attraction-reviews {
     font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.35);
+    color: var(--text-muted);
     font-weight: 500;
 }
 
 .view-details-btn {
     background: transparent;
-    color: #4361ee;
-    border: 1px solid rgba(67, 97, 238, 0.3);
+    color: var(--primary);
+    border: 2px solid var(--primary);
     padding: 0.6rem 1.2rem;
-    border-radius: 10px;
+    border-radius: 8px;
     font-weight: 600;
     font-size: 0.85rem;
     cursor: pointer;
@@ -168,10 +153,9 @@
 }
 
 .view-details-btn:hover {
-    background: linear-gradient(135deg, #4361ee, #3a0ca3);
+    background: var(--primary);
     color: white;
-    border-color: #4361ee;
-    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+    box-shadow: 0 4px 15px rgba(26, 58, 82, 0.3);
 }
 
 .attraction-card:active {

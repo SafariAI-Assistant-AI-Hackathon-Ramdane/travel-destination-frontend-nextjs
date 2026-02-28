@@ -102,9 +102,9 @@ function Home() {
       {/* Hero Section */}
       <header className="hero-section">
         <div className="hero-content">
-            <div className="hero-badge">Welcome to the Red City</div>
-            <h1 className="hero-title">Experience the Magic of <br/><span className="gradient-text">Marrakech</span></h1>
-            <p className="hero-subtitle">Discover top-rated tours, hidden gems, and unforgettable experiences curated just for you.</p>
+            <div className="hero-badge">Discover Marrakech-Safi Region</div>
+            <h1 className="hero-title">Explore the Heart of <br/><span className="gradient-text">Marrakech-Safi</span></h1>
+            <p className="hero-subtitle">From the vibrant souks of Marrakech to the coastal beauty of Safi and Essaouira - discover authentic Morocco.</p>
             <button className="hero-cta-button" onClick={() => navigate('/attractions')}>
                 Explore Attractions
                 <span className="arrow-icon">→</span>
@@ -155,7 +155,7 @@ function Home() {
             <div className="header-text">
               <div className="ai-badge" style={{background: 'linear-gradient(135deg, #d97706 0%, #b45309 100%)'}}>
                 <TrendingUp size={16} />
-                <span>Most Loved in Marrakech</span>
+                <span>Most Loved in Marrakech-Safi</span>
               </div>
               <h2>Trending Experiences</h2>
               <p>Join thousands of travelers exploring these top-rated local gems.</p>
@@ -189,7 +189,7 @@ function Home() {
       <footer className="footer">
           <div className="footer-content">
             <p>© 2024 MarrakechTrips. Your AI-Powered Travel Guide.</p>
-            <div className="footer-tagline">Made with ✨ for Marrakech</div>
+            <div className="footer-tagline">Made with ✨ for Marrakech-Safi Region</div>
           </div>
       </footer>
     </div>

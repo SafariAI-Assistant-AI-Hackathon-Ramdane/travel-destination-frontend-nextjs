@@ -11,6 +11,8 @@ interface AttractionProps {
   images: string; // JSON string array like "['img1.jpg', 'img2.jpg']"
   type?: string;
   userRating?: number;
+  latitude?: string;
+  longitude?: string;
 }
 
 const AttractionCard: React.FC<AttractionProps> = ({ 
@@ -21,9 +23,16 @@ const AttractionCard: React.FC<AttractionProps> = ({
   review_count, 
   images = "[]", 
   address = "Address not available",
-  userRating = 0
+  userRating = 0,
+  latitude,
+  longitude
 }) => {
   const navigate = useNavigate();
+
+  const handleMapClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigate(`/map?name=${encodeURIComponent(attraction_name)}&address=${encodeURIComponent(address)}`);
+  };
 
 
   // Function to get folder name from attraction name
@@ -183,6 +192,14 @@ const AttractionCard: React.FC<AttractionProps> = ({
           >
             View Details
             <span aria-hidden="true">→</span>
+          </button>
+          <button 
+            className="view-details-btn"
+            onClick={handleMapClick}
+            aria-label={`View ${attraction_name} on map`}
+            style={{ marginLeft: '8px' }}
+          >
+            🗺️ Carte
           </button>
         </div>
       </div>

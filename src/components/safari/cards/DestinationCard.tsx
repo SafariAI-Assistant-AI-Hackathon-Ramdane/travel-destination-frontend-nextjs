@@ -14,6 +14,10 @@ const DestinationCard: React.FC<Props> = ({ data }) => {
     navigate(`/attraction/${data.attractionIndex}`);
   };
 
+  const handleMapClick = () => {
+    navigate(`/map?name=${encodeURIComponent(data.name)}&address=${encodeURIComponent(data.address)}`);
+  };
+
   return (
     <div className="safari-card destination-card">
       <div className="safari-card-image-wrap" onClick={handleDetails} style={{ cursor: 'pointer' }}>
@@ -42,7 +46,7 @@ const DestinationCard: React.FC<Props> = ({ data }) => {
 
       <div className="safari-card-actions">
         <button className="safari-card-btn primary" onClick={handleDetails}>Voir Détails</button>
-        <button className="safari-card-btn secondary">
+        <button className="safari-card-btn secondary" onClick={handleMapClick}>
           <ExternalLink size={12} /> Carte
         </button>
       </div>

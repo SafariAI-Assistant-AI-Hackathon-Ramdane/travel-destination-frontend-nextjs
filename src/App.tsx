@@ -10,6 +10,7 @@ import UserProfile from './components/UserProfile';
 import OnboardingPage from './components/OnboardingPage';
 import Navbar from './components/Navbar';
 import SafariPage from './components/safari/SafariPage';
+import MapPage from './components/MapPage';
 import './App.css';
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
           {/* Safari is the main interface — default homepage */}
           <Route path="/" element={<SafariPage />} />
           <Route path="/safari" element={<Navigate to="/" replace />} />
+
+          {/* Map page */}
+          <Route path="/map" element={<MapPage />} />
 
           {/* Existing pages — all preserved */}
           <Route path="/home" element={<Home />} />

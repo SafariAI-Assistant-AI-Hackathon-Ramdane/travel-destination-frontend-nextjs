@@ -1,9 +1,11 @@
+/* SafariTypingIndicator.css - Marrakech-Safi Blanc & Bleu Foncé */
+
 .safari-typing-row {
     display: flex;
     align-items: flex-end;
     gap: 10px;
     padding: 4px 0 8px;
-    animation: fadeSlideUp 0.3s ease;
+    animation: fadeUp 0.3s ease;
 }
 
 .safari-typing-bubble {
@@ -11,10 +13,10 @@
     align-items: center;
     gap: 5px;
     padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(67, 97, 238, 0.2);
-    border-radius: 18px 18px 18px 4px;
-    backdrop-filter: blur(8px);
+    background: white;
+    border: 2px solid rgba(26, 58, 82, 0.1);
+    border-radius: 16px 16px 16px 4px;
+    box-shadow: 0 2px 10px rgba(26, 58, 82, 0.08);
 }
 
 .safari-typing-dot {
@@ -22,8 +24,8 @@
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #4361ee;
-    animation: bounceDot 1.4s ease-in-out infinite;
+    background: var(--primary);
+    animation: dotBounce 1.4s ease-in-out infinite;
 }
 
 .safari-typing-dot:nth-child(2) {
@@ -36,22 +38,28 @@
 
 .safari-typing-label {
     font-size: 0.72rem;
-    color: rgba(255, 255, 255, 0.45);
+    color: var(--text-muted);
     margin-left: 4px;
-    letter-spacing: 0.03em;
 }
 
-@keyframes bounceDot {
-
-    0%,
-    80%,
-    100% {
+@keyframes dotBounce {
+    0%, 80%, 100% {
         transform: translateY(0);
-        opacity: 0.5;
+        opacity: 0.4;
     }
-
     40% {
         transform: translateY(-6px);
         opacity: 1;
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

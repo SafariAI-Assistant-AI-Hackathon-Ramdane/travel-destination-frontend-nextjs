@@ -1,32 +1,36 @@
+/* SafariChat.css - Marrakech-Safi Blanc & Bleu Foncé */
+
 .safari-chat {
     flex: 1;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     min-width: 0;
+    background: white;
+    transition: background 0.3s ease;
 }
 
-.safari-chat.rtl {
-    direction: rtl;
-    text-align: right;
+[data-theme="dark"] .safari-chat {
+    background: #1a1f26;
 }
 
-.safari-chat.ltr {
-    direction: ltr;
-    text-align: left;
-}
-
-/* ═══ Header ═══════════════════════════════════════ */
 .safari-chat-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding: 12px 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-    background: rgba(255, 255, 255, 0.02);
-    backdrop-filter: blur(12px);
+    padding: 13px 20px;
+    border-bottom: 2px solid rgba(26, 58, 82, 0.1);
+    background: white;
     flex-shrink: 0;
+    box-shadow: 0 2px 10px rgba(26, 58, 82, 0.05);
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .safari-chat-header {
+    background: #242b33;
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .safari-chat-header-left {
@@ -43,14 +47,13 @@
 
 .safari-chat-name {
     font-size: 1.05rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.92);
+    font-weight: 800;
+    color: var(--text-main);
     margin: 0;
-    letter-spacing: 0.02em;
 }
 
 .safari-chat-globe {
-    filter: drop-shadow(0 0 6px rgba(67, 97, 238, 0.7));
+    color: var(--primary);
 }
 
 .safari-chat-status {
@@ -58,19 +61,24 @@
     align-items: center;
     gap: 6px;
     font-size: 0.72rem;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--text-muted);
+    font-weight: 500;
 }
 
 .safari-online-dot {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #06d6a0;
-    box-shadow: 0 0 6px rgba(6, 214, 160, 0.8);
-    animation: pulse 2s infinite;
+    background: var(--primary);
+    box-shadow: 0 0 6px rgba(26, 58, 82, 0.5);
+    animation: pulse 2s ease-in-out infinite;
 }
 
-/* ═══ Header Actions ═══════════════════════════════ */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
 .safari-chat-header-actions {
     display: flex;
     align-items: center;
@@ -81,70 +89,78 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
+    background: rgba(26, 58, 82, 0.05);
+    border-radius: 8px;
     padding: 3px 6px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(26, 58, 82, 0.1);
+    transition: all 0.2s;
 }
 
-.safari-lang-switcher svg {
-    color: rgba(255, 255, 255, 0.4);
-    flex-shrink: 0;
+.safari-lang-switcher:hover {
+    background: rgba(26, 58, 82, 0.1);
+    border-color: var(--primary);
 }
 
 .safari-lang-btn {
     background: transparent;
     border: none;
-    color: rgba(255, 255, 255, 0.45);
+    color: var(--text-muted);
     font-size: 0.72rem;
-    font-weight: 600;
-    padding: 4px 8px;
-    border-radius: 7px;
+    font-weight: 700;
+    padding: 4px 9px;
+    border-radius: 6px;
     cursor: pointer;
-    font-family: inherit;
-    transition: all 0.2s ease;
+    transition: all 0.2s;
 }
 
 .safari-lang-btn:hover {
-    color: rgba(255, 255, 255, 0.8);
-    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-main);
+    background: rgba(26, 58, 82, 0.08);
 }
 
 .safari-lang-btn.active {
-    background: linear-gradient(135deg, #4361ee, #3a0ca3);
+    background: var(--primary);
     color: white;
-    box-shadow: 0 2px 8px rgba(67, 97, 238, 0.4);
+    font-weight: 800;
 }
 
 .safari-header-icon-btn {
     width: 34px;
     height: 34px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.04);
-    color: rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
+    border: 2px solid rgba(26, 58, 82, 0.15);
+    background: white;
+    color: var(--text-muted);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
+    transition: all 0.2s;
 }
 
 .safari-header-icon-btn:hover {
-    background: rgba(67, 97, 238, 0.15);
-    border-color: rgba(67, 97, 238, 0.3);
-    color: #4361ee;
+    background: rgba(26, 58, 82, 0.05);
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
-/* ═══ Quick Action Buttons ═════════════════════════ */
 .safari-quick-actions {
     display: flex;
     gap: 8px;
     padding: 10px 20px;
     overflow-x: auto;
+    overflow-y: visible;
     flex-shrink: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    scrollbar-width: none;
+    border-bottom: 1px solid rgba(26, 58, 82, 0.08);
+    background: rgba(26, 58, 82, 0.02);
+    scrollbar-width: thin;
+    position: relative;
+    z-index: 100;
+}
+
+[data-theme="dark"] .safari-quick-actions {
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom-color: rgba(255, 255, 255, 0.05);
 }
 
 .safari-quick-actions::-webkit-scrollbar {
@@ -156,33 +172,106 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 7px 14px;
+    padding: 7px 15px;
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.04);
-    color: rgba(255, 255, 255, 0.7);
+    border: 2px solid rgba(26, 58, 82, 0.15);
+    background: white;
+    color: var(--text-muted);
     font-size: 0.78rem;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
-    font-family: inherit;
-    transition: all 0.25s ease;
+    transition: all 0.2s;
     white-space: nowrap;
 }
 
+[data-theme="dark"] .safari-quick-btn {
+    background: #242b33;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+}
+
 .safari-quick-btn:hover {
-    background: rgba(67, 97, 238, 0.15);
-    border-color: rgba(67, 97, 238, 0.35);
-    color: rgba(255, 255, 255, 0.95);
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(26, 58, 82, 0.05);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.2);
+}
+
+[data-theme="dark"] .safari-quick-btn:hover {
+    background: rgba(26, 58, 82, 0.3);
 }
 
 .safari-quick-btn svg {
-    color: #4361ee;
+    color: var(--primary);
     flex-shrink: 0;
 }
 
-/* ═══ Messages ═════════════════════════════════════ */
+.safari-category-dropdown {
+    position: relative;
+    flex-shrink: 0;
+    z-index: 101;
+}
+
+.safari-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    background: white;
+    border: 2px solid rgba(26, 58, 82, 0.15);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(26, 58, 82, 0.15);
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 180px;
+    z-index: 1000;
+    animation: dropdownFade 0.2s ease;
+}
+
+[data-theme="dark"] .safari-dropdown-menu {
+    background: #242b33;
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes dropdownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.safari-dropdown-menu button {
+    background: transparent;
+    border: none;
+    padding: 10px 14px;
+    text-align: left;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-main);
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: inherit;
+}
+
+.safari-dropdown-menu button:hover {
+    background: rgba(26, 58, 82, 0.08);
+    color: var(--primary);
+}
+
+[data-theme="dark"] .safari-dropdown-menu button:hover {
+    background: rgba(26, 58, 82, 0.3);
+}
+
 .safari-chat-messages {
     flex: 1;
     overflow-y: auto;
@@ -190,8 +279,12 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(67, 97, 238, 0.25) transparent;
+    background: white;
+    transition: background 0.3s ease;
+}
+
+[data-theme="dark"] .safari-chat-messages {
+    background: #1a1f26;
 }
 
 .safari-chat-messages::-webkit-scrollbar {
@@ -199,76 +292,6 @@
 }
 
 .safari-chat-messages::-webkit-scrollbar-thumb {
-    background: rgba(67, 97, 238, 0.25);
+    background: rgba(26, 58, 82, 0.2);
     border-radius: 2px;
-}
-
-.safari-chat-onboarding-wrapper {
-    padding: 4px 0;
-}
-
-/* ═══ Light theme overrides ════════════════════════ */
-.safari-page[data-theme="light"] .safari-chat-header {
-    background: rgba(0, 0, 0, 0.02);
-    border-bottom-color: rgba(0, 0, 0, 0.08);
-}
-
-.safari-page[data-theme="light"] .safari-chat-name {
-    color: #1e293b;
-}
-
-.safari-page[data-theme="light"] .safari-chat-status {
-    color: #64748b;
-}
-
-.safari-page[data-theme="light"] .safari-lang-switcher {
-    background: rgba(0, 0, 0, 0.04);
-    border-color: rgba(0, 0, 0, 0.08);
-}
-
-.safari-page[data-theme="light"] .safari-lang-btn {
-    color: #64748b;
-}
-
-.safari-page[data-theme="light"] .safari-lang-btn:hover {
-    color: #1e293b;
-    background: rgba(0, 0, 0, 0.06);
-}
-
-.safari-page[data-theme="light"] .safari-header-icon-btn {
-    border-color: rgba(0, 0, 0, 0.1);
-    background: rgba(0, 0, 0, 0.03);
-    color: #475569;
-}
-
-.safari-page[data-theme="light"] .safari-header-icon-btn:hover {
-    background: rgba(67, 97, 238, 0.08);
-    color: #4361ee;
-}
-
-.safari-page[data-theme="light"] .safari-quick-btn {
-    border-color: rgba(0, 0, 0, 0.1);
-    background: rgba(0, 0, 0, 0.03);
-    color: #475569;
-}
-
-.safari-page[data-theme="light"] .safari-quick-btn:hover {
-    background: rgba(67, 97, 238, 0.08);
-    color: #1e293b;
-}
-
-.safari-page[data-theme="light"] .safari-quick-actions {
-    border-bottom-color: rgba(0, 0, 0, 0.06);
-}
-
-@keyframes pulse {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.4;
-    }
 }

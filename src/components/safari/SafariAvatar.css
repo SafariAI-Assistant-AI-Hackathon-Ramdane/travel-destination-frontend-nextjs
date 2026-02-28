@@ -1,3 +1,5 @@
+/* SafariAvatar.css - Marrakech-Safi Blanc & Bleu Foncé */
+
 .safari-avatar-wrapper {
     position: relative;
     display: flex;
@@ -10,14 +12,21 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: linear-gradient(135deg, #4361ee, #06d6a0);
+    background: var(--primary);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     position: relative;
     z-index: 1;
-    box-shadow: 0 0 12px rgba(67, 97, 238, 0.6);
+    box-shadow: 0 4px 15px rgba(26, 58, 82, 0.25);
+    border: 2px solid rgba(26, 58, 82, 0.2);
+    transition: all 0.3s;
+}
+
+.safari-avatar-inner:hover {
+    box-shadow: 0 6px 20px rgba(26, 58, 82, 0.35);
+    border-color: var(--primary);
 }
 
 .safari-avatar-inner img {
@@ -28,6 +37,8 @@
 .safari-avatar-fallback {
     font-size: 1.2em;
     position: absolute;
+    color: white;
+    font-weight: 800;
 }
 
 .safari-avatar-inner img+.safari-avatar-fallback {
@@ -39,21 +50,18 @@
     inset: -4px;
     border-radius: 50%;
     background: transparent;
-    border: 2px solid rgba(67, 97, 238, 0.5);
-    animation: safariPulse 2.2s ease-in-out infinite;
+    border: 2px solid rgba(26, 58, 82, 0.3);
+    animation: pulse 2.5s ease-in-out infinite;
     z-index: 0;
 }
 
-@keyframes safariPulse {
-
-    0%,
-    100% {
+@keyframes pulse {
+    0%, 100% {
         transform: scale(1);
-        opacity: 0.7;
+        opacity: 0.6;
     }
-
     50% {
-        transform: scale(1.2);
+        transform: scale(1.15);
         opacity: 0;
     }
 }

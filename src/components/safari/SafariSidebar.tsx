@@ -10,6 +10,7 @@ type Lang = 'fr' | 'en' | 'ar';
 
 interface SafariSidebarProps {
   onInjectCards: (cards: CardPayload[], text: string) => void;
+  onSendMessage?: (text: string) => void;
   lang: Lang;
 }
 
@@ -20,6 +21,10 @@ const T: Record<string, Record<Lang, string>> = {
   search: { fr: 'Recherche par titre', en: 'Search by title', ar: 'البحث بالعنوان' },
   image: { fr: 'Recherche par image', en: 'Search by image', ar: 'البحث بالصورة' },
   similar: { fr: 'Voyageurs similaires', en: 'Similar travelers', ar: 'مسافرون مشابهون' },
+  categories: { fr: 'Catégories', en: 'Categories', ar: 'فئات' },
+  restaurants: { fr: 'Restaurants', en: 'Restaurants', ar: 'مطاعم' },
+  family: { fr: 'Famille', en: 'Family', ar: 'عائلي' },
+  romantic: { fr: 'Romantique', en: 'Romantic', ar: 'رومانسي' },
   loading: { fr: 'Chargement...', en: 'Loading...', ar: '...جاري التحميل' },
   loadReco: { fr: '✨ Charger mes recommandations', en: '✨ Load my recommendations', ar: '✨ تحميل توصياتي' },
   searchPlaceholder: { fr: 'Jardin, Palais, Souk...', en: 'Garden, Palace, Souk...', ar: '...حديقة، قصر، سوق' },
@@ -54,7 +59,7 @@ function AttractionToMiniCard(attr: Attraction): MiniCard {
   };
 }
 
-const SafariSidebar: React.FC<SafariSidebarProps> = ({ onInjectCards, lang }) => {
+const SafariSidebar: React.FC<SafariSidebarProps> = ({ onInjectCards, onSendMessage, lang }) => {
   const [openSection, setOpenSection] = useState<string>('reco');
   const [recoCards, setRecoCards] = useState<MiniCard[]>([]);
   const [recoLoading, setRecoLoading] = useState(false);
@@ -368,6 +373,29 @@ const SafariSidebar: React.FC<SafariSidebarProps> = ({ onInjectCards, lang }) =>
                 <MiniCardList cards={similarCards} />
               </>
             )}
+          </div>
+        )}
+      </div>
+
+      {/* Section 5 — Categories */}
+      <div className="safari-sidebar-section">
+        <button className="safari-sidebar-section-toggle" onClick={() => toggle('categories')}>
+          <span>🎯</span>
+          <span>{T.categories[lang]}</span>
+          {openSection === 'categories' ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+        </button>
+
+        {openSection === 'categories' && (
+          <div className="safari-sidebar-content">
+            <button className="safari-sidebar-cta" onClick={() => onSendMessage?.(lang === 'ar' ? 'أفضل المطاعم في مراكش' : lang === 'en' ? 'Best restaurants in Marrakech' : 'Meilleurs restaurants à Marrakech')}>
+              🍽️ {T.restaurants[lang]}
+            </button>
+            <button className="safari-sidebar-cta" onClick={() => onSendMessage?.(lang === 'ar' ? 'أنشطة عائلية' : lang === 'en' ? 'Family activities' : 'Activités familiales')}>
+              👨👩👧 {T.family[lang]}
+            </button>
+            <button className="safari-sidebar-cta" onClick={() => onSendMessage?.(lang === 'ar' ? 'أماكن رومانسية' : lang === 'en' ? 'Romantic places' : 'Lieux romantiques')}>
+              💑 {T.romantic[lang]}
+            </button>
           </div>
         )}
       </div>

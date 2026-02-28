@@ -1,57 +1,59 @@
+/* SafariSidebar.css - Marrakech-Safi Blanc & Bleu Foncé */
+
 .safari-sidebar {
     width: 280px;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    gap: 0;
     overflow-y: auto;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
-    border-left: 1px solid rgba(255, 255, 255, 0.07);
-    scrollbar-width: thin;
-    scrollbar-color: rgba(67, 97, 238, 0.3) transparent;
+    background: white;
+    border-left: 2px solid rgba(26, 58, 82, 0.1);
+    box-shadow: -4px 0 20px rgba(26, 58, 82, 0.08);
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .safari-sidebar {
+    background: #242b33;
+    border-left-color: rgba(255, 255, 255, 0.1);
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
 }
 
 .safari-sidebar::-webkit-scrollbar {
-    width: 3px;
+    width: 4px;
 }
 
 .safari-sidebar::-webkit-scrollbar-thumb {
-    background: rgba(67, 97, 238, 0.3);
+    background: rgba(26, 58, 82, 0.2);
     border-radius: 2px;
 }
 
-/* Header */
 .safari-sidebar-header {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 20px 16px 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 20px 16px;
+    border-bottom: 2px solid rgba(26, 58, 82, 0.1);
 }
 
 .safari-sidebar-globe {
     font-size: 1.8rem;
-    filter: drop-shadow(0 0 8px rgba(67, 97, 238, 0.6));
 }
 
 .safari-sidebar-title {
     font-size: 1rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.92);
+    font-weight: 800;
+    color: var(--text-main);
     margin: 0;
-    letter-spacing: 0.04em;
 }
 
 .safari-sidebar-sub {
     font-size: 0.72rem;
-    color: rgba(255, 255, 255, 0.35);
+    color: var(--text-muted);
     margin: 0;
 }
 
-/* Sections */
 .safari-sidebar-section {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(26, 58, 82, 0.08);
 }
 
 .safari-sidebar-section-toggle {
@@ -62,70 +64,50 @@
     padding: 13px 16px;
     background: transparent;
     border: none;
-    color: rgba(255, 255, 255, 0.72);
+    color: var(--text-main);
     font-size: 0.82rem;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     text-align: left;
-    transition: background 0.2s ease, color 0.2s ease;
-    font-family: inherit;
-}
-
-.safari-sidebar-section-toggle span:first-of-type {
-    flex: 1;
+    transition: all 0.2s;
 }
 
 .safari-sidebar-section-toggle:hover {
-    background: rgba(67, 97, 238, 0.08);
-    color: rgba(255, 255, 255, 0.9);
+    background: rgba(26, 58, 82, 0.05);
+    color: var(--primary);
 }
 
-.safari-sidebar-section-toggle svg {
-    flex-shrink: 0;
-    color: #4361ee;
-    opacity: 0.7;
-}
-
-/* Content */
 .safari-sidebar-content {
     padding: 8px 14px 14px;
-    animation: fadeSlideUp 0.25s ease;
-}
-
-.safari-sidebar-spinner {
-    font-size: 0.78rem;
-    color: rgba(255, 255, 255, 0.4);
-    text-align: center;
-    padding: 10px 0;
-    letter-spacing: 0.04em;
 }
 
 .safari-sidebar-label {
-    font-size: 0.72rem;
-    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.68rem;
+    color: var(--text-muted);
     margin: 0 0 10px;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 .safari-sidebar-cta {
     width: 100%;
     padding: 10px;
-    background: linear-gradient(135deg, rgba(67, 97, 238, 0.2), rgba(6, 214, 160, 0.1));
-    border: 1px solid rgba(67, 97, 238, 0.3);
-    border-radius: 12px;
-    color: rgba(255, 255, 255, 0.85);
+    background: rgba(26, 58, 82, 0.05);
+    border: 2px solid rgba(26, 58, 82, 0.15);
+    border-radius: 10px;
+    color: var(--text-main);
     font-size: 0.82rem;
     cursor: pointer;
-    font-family: inherit;
-    transition: all 0.2s ease;
+    transition: all 0.2s;
+    font-weight: 700;
 }
 
 .safari-sidebar-cta:hover {
-    background: linear-gradient(135deg, rgba(67, 97, 238, 0.3), rgba(6, 214, 160, 0.2));
-    transform: translateY(-1px);
+    background: rgba(26, 58, 82, 0.1);
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
-/* Search input */
 .safari-sidebar-search-wrap {
     position: relative;
     margin-bottom: 10px;
@@ -136,68 +118,60 @@
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    color: rgba(255, 255, 255, 0.35);
+    color: var(--text-muted);
 }
 
 .safari-sidebar-search-input {
     width: 100%;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    background: white;
+    border: 2px solid rgba(26, 58, 82, 0.15);
+    border-radius: 8px;
     padding: 9px 10px 9px 32px;
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--text-main);
     font-size: 0.82rem;
     outline: none;
-    font-family: inherit;
-    box-sizing: border-box;
-    transition: border-color 0.2s ease;
+    transition: all 0.2s;
 }
 
 .safari-sidebar-search-input:focus {
-    border-color: rgba(67, 97, 238, 0.5);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(26, 58, 82, 0.1);
 }
 
-.safari-sidebar-search-input::placeholder {
-    color: rgba(255, 255, 255, 0.3);
-}
-
-/* Upload button */
 .safari-sidebar-upload-btn {
     width: 100%;
     padding: 10px;
-    border: 1px dashed rgba(6, 214, 160, 0.4);
-    border-radius: 12px;
-    background: rgba(6, 214, 160, 0.06);
-    color: #06d6a0;
+    border: 2px dashed rgba(26, 58, 82, 0.3);
+    border-radius: 10px;
+    background: rgba(26, 58, 82, 0.03);
+    color: var(--primary);
     font-size: 0.82rem;
     cursor: pointer;
-    font-family: inherit;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    transition: all 0.2s ease;
+    transition: all 0.2s;
     margin-bottom: 10px;
+    font-weight: 700;
 }
 
 .safari-sidebar-upload-btn:hover:not(:disabled) {
-    background: rgba(6, 214, 160, 0.12);
-    border-color: #06d6a0;
+    background: rgba(26, 58, 82, 0.08);
+    border-color: var(--primary);
 }
 
 .safari-sidebar-upload-btn:disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
 }
 
-/* Mini cards */
 .safari-mini-cards {
     display: flex;
     flex-direction: column;
     gap: 8px;
     max-height: 300px;
     overflow-y: auto;
-    scrollbar-width: thin;
 }
 
 .safari-mini-card {
@@ -205,27 +179,27 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid transparent;
-    border-radius: 12px;
+    background: white;
+    border: 2px solid rgba(26, 58, 82, 0.1);
+    border-radius: 10px;
     padding: 8px 10px;
     cursor: pointer;
     text-align: left;
-    font-family: inherit;
-    transition: all 0.2s ease;
+    transition: all 0.2s;
 }
 
 .safari-mini-card:hover {
-    background: rgba(67, 97, 238, 0.12);
-    border-color: rgba(67, 97, 238, 0.3);
-    transform: translateX(3px);
+    background: rgba(26, 58, 82, 0.05);
+    border-color: var(--primary);
+    transform: translateX(4px);
 }
 
 .safari-mini-card-img-wrap {
     width: 42px;
     height: 42px;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(26, 58, 82, 0.08);
+    border: 2px solid rgba(26, 58, 82, 0.1);
     overflow: hidden;
     flex-shrink: 0;
     display: flex;
@@ -242,35 +216,28 @@
 
 .safari-mini-card-info {
     overflow: hidden;
+    flex: 1;
 }
 
 .safari-mini-card-name {
     font-size: 0.78rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.85);
+    font-weight: 700;
+    color: var(--text-main);
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
+.safari-mini-card:hover .safari-mini-card-name {
+    color: var(--primary);
+}
+
 .safari-mini-card-type {
-    font-size: 0.68rem;
-    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.67rem;
+    color: var(--text-muted);
     margin: 2px 0 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-@keyframes fadeSlideUp {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }

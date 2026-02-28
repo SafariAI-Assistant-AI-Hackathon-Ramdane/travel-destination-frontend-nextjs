@@ -15,6 +15,7 @@ export type Lang = 'fr' | 'en' | 'ar';
 
 interface SafariChatProps {
   onInjectCards: (cb: (cards: CardPayload[], text: string) => void) => void;
+  onSendMessage: (cb: (text: string) => void) => void;
   themeRef: React.MutableRefObject<Theme>;
   lang: Lang;
   onLangChange: (lang: Lang) => void;
@@ -25,6 +26,7 @@ const LANG_LABELS: Record<Lang, string> = { fr: 'FR', en: 'EN', ar: 'عر' };
 
 const SafariChat: React.FC<SafariChatProps> = ({
   onInjectCards,
+  onSendMessage,
   themeRef,
   lang,
   onLangChange,
@@ -45,16 +47,18 @@ const SafariChat: React.FC<SafariChatProps> = ({
   const navigate = useNavigate();
   const bottomRef = useRef<HTMLDivElement>(null);
   const isLoggedIn = authService.isAuthenticated();
+  const [showCategoryDropdown, setShowCategoryDropdown] = React.useState(false);
 
-  // Sync theme ref
   themeRef.current = theme;
 
-  // Register inject function with parent
   React.useEffect(() => {
     onInjectCards(injectCards);
   }, [injectCards, onInjectCards]);
 
-  // Auto-scroll to bottom on new messages
+  React.useEffect(() => {
+    onSendMessage(sendMessage);
+  }, [sendMessage, onSendMessage]);
+
   React.useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isTyping]);
@@ -66,7 +70,6 @@ const SafariChat: React.FC<SafariChatProps> = ({
 
   return (
     <div className={`safari-chat ${lang === 'ar' ? 'rtl' : 'ltr'}`}>
-      {/* Safari Header — replaces navbar on this page */}
       <div className="safari-chat-header">
         <div className="safari-chat-header-left">
           <SafariAvatar size={38} showPulse />
@@ -80,7 +83,6 @@ const SafariChat: React.FC<SafariChatProps> = ({
         </div>
 
         <div className="safari-chat-header-actions">
-          {/* Language switcher */}
           <div className="safari-lang-switcher">
             <Globe size={14} />
             {(['fr', 'en', 'ar'] as Lang[]).map((l) => (
@@ -94,12 +96,10 @@ const SafariChat: React.FC<SafariChatProps> = ({
             ))}
           </div>
 
-          {/* Dark mode toggle */}
           <button className="safari-header-icon-btn" onClick={handleThemeToggle} title="Toggle theme">
             {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
           </button>
 
-          {/* Auth */}
           {isLoggedIn ? (
             <>
               <button className="safari-header-icon-btn" onClick={() => navigate('/profile')} title="Profile">
@@ -117,7 +117,6 @@ const SafariChat: React.FC<SafariChatProps> = ({
         </div>
       </div>
 
-      {/* Quick action buttons */}
       <div className="safari-quick-actions">
         <button className="safari-quick-btn" onClick={() => navigate('/attractions')}>
           <Compass size={14} />
@@ -134,13 +133,11 @@ const SafariChat: React.FC<SafariChatProps> = ({
         </button>
       </div>
 
-      {/* Messages */}
       <div className="safari-chat-messages">
         {messages.map((msg) => (
           <SafariMessage key={msg.id} message={msg} theme={theme} />
         ))}
 
-        {/* Onboarding (inline in chat if not onboarded) */}
         {!isOnboarded && messages.length <= 1 && (
           <div className="safari-chat-onboarding-wrapper">
             <SafariOnboarding onComplete={completeOnboarding} />
@@ -151,7 +148,6 @@ const SafariChat: React.FC<SafariChatProps> = ({
         <div ref={bottomRef} />
       </div>
 
-      {/* Input */}
       <SafariInput
         onSend={sendMessage}
         onImageUpload={sendImageSearch}
