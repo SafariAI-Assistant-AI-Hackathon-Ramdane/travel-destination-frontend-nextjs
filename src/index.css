@@ -1,0 +1,48 @@
+/* Global variables for consistent theme */
+:root {
+  --primary: #dc2626;
+  /* Red 600 - Main Brand Color */
+  --primary-dark: #b91c1c;
+  /* Red 700 - Hover/Active */
+  --secondary: #d97706;
+  /* Amber 600 - Accents/Ratings */
+  --accent: #991b1b;
+  /* Red 800 - Deep contrasts */
+  --background: #fef2f2;
+  /* Red 50 - Very subtle warm bg */
+  --surface: #ffffff;
+  --text-main: #1e293b;
+  /* Slate 800 */
+  --text-muted: #64748b;
+  /* Slate 500 */
+  --nav-height: 80px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  color: var(--text-main);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}

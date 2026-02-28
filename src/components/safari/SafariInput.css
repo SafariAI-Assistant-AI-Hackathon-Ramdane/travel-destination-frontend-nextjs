@@ -1,0 +1,111 @@
+.safari-input-bar {
+    padding: 12px 16px 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(10, 15, 30, 0.9);
+    backdrop-filter: blur(10px);
+    flex-shrink: 0;
+}
+
+.safari-input-inner {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: 10px 12px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.safari-input-inner:focus-within {
+    border-color: rgba(67, 97, 238, 0.6);
+    box-shadow: 0 0 20px rgba(67, 97, 238, 0.15);
+}
+
+.safari-input-field {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    resize: none;
+    line-height: 1.5;
+    max-height: 120px;
+    overflow-y: auto;
+    font-family: inherit;
+    scrollbar-width: thin;
+}
+
+.safari-input-field::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.safari-input-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.safari-input-icon-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.safari-input-icon-btn:hover {
+    background: rgba(6, 214, 160, 0.15);
+    border-color: #06d6a0;
+    color: #06d6a0;
+}
+
+.safari-input-send-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #4361ee, #3a0ca3);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.4);
+}
+
+.safari-input-send-btn:hover:not(:disabled) {
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(67, 97, 238, 0.55);
+}
+
+.safari-input-send-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.safari-input-hint {
+    font-size: 0.68rem;
+    color: rgba(255, 255, 255, 0.22);
+    text-align: center;
+    margin: 6px 0 0;
+    letter-spacing: 0.03em;
+}
+
+.safari-input-hint kbd {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    padding: 0 4px;
+    font-family: monospace;
+    font-size: 0.65rem;
+}

@@ -1,0 +1,312 @@
+/* OnboardingPage.css - Marrakech Red Theme */
+
+.onboarding-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fef2f2 0%, #fff7ed 100%);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.onboarding-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.onboarding-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #dc2626;
+}
+
+.onboarding-logo h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1e293b;
+}
+
+.skip-btn {
+    background: transparent;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.skip-btn:hover {
+    background: white;
+    border-color: #dc2626;
+    color: #dc2626;
+}
+
+.onboarding-content {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.progress-section {
+    margin-bottom: 2rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #dc2626 0%, #d97706 100%);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 99px;
+}
+
+.progress-text {
+    text-align: center;
+    color: #64748b;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.instruction-text {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.instruction-text h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+}
+
+.instruction-text p {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+.attraction-showcase {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(220, 38, 38, 0.08);
+    margin-bottom: 2rem;
+}
+
+.attraction-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+}
+
+.attraction-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.attraction-image-wrapper:hover .attraction-image {
+    transform: scale(1.05);
+}
+
+.attraction-info-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 2rem;
+    color: white;
+}
+
+.attraction-info-overlay h3 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.attraction-category {
+    background: rgba(220, 38, 38, 0.9);
+    padding: 0.4rem 1rem;
+    border-radius: 99px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.rating-section {
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.stars-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.star-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0.5rem;
+    border-radius: 12px;
+}
+
+.star-btn:hover {
+    transform: scale(1.15) rotate(-5deg);
+}
+
+.star-btn.active {
+    animation: starPop 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes starPop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3) rotate(10deg);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.rating-label {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #dc2626;
+    min-height: 1.75rem;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.next-btn,
+.finish-btn {
+    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+    color: white;
+    border: none;
+    padding: 1.25rem 3rem;
+    border-radius: 16px;
+    font-size: 1.125rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
+}
+
+.next-btn:hover:not(:disabled),
+.finish-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(220, 38, 38, 0.4);
+}
+
+.next-btn:disabled,
+.finish-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.finish-btn {
+    background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+    box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+}
+
+.finish-btn:hover:not(:disabled) {
+    box-shadow: 0 15px 40px rgba(124, 58, 237, 0.4);
+}
+
+/* Loading & Error States */
+.onboarding-loading,
+.onboarding-error {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid #fee2e2;
+    border-top-color: #dc2626;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.onboarding-error h2 {
+    font-size: 2rem;
+    color: #1e293b;
+}
+
+.onboarding-error button {
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .onboarding-container {
+        padding: 1rem;
+    }
+
+    .instruction-text h2 {
+        font-size: 1.5rem;
+    }
+
+    .attraction-image-wrapper {
+        height: 300px;
+    }
+
+    .stars-container {
+        gap: 0.5rem;
+    }
+
+    .star-btn svg {
+        width: 36px;
+        height: 36px;
+    }
+
+    .next-btn,
+    .finish-btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
+}

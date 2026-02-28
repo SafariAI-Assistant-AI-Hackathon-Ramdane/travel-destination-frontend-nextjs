@@ -1,0 +1,59 @@
+.safari-avatar-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.safari-avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4361ee, #06d6a0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 12px rgba(67, 97, 238, 0.6);
+}
+
+.safari-avatar-inner img {
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.safari-avatar-fallback {
+    font-size: 1.2em;
+    position: absolute;
+}
+
+.safari-avatar-inner img+.safari-avatar-fallback {
+    display: none;
+}
+
+.safari-avatar-pulse {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid rgba(67, 97, 238, 0.5);
+    animation: safariPulse 2.2s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes safariPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+}

@@ -1,0 +1,157 @@
+/* Navbar.css — Safari AI Dark Theme */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background: rgba(10, 15, 30, 0.92);
+    backdrop-filter: blur(16px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    height: var(--nav-height);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.logo-icon {
+    font-size: 2rem;
+}
+
+.logo-text .highlight {
+    color: #4361ee;
+    font-weight: 800;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-left: 2rem;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.nav-item:hover {
+    color: #4361ee;
+    background: rgba(67, 97, 238, 0.1);
+}
+
+.nav-item.active {
+    color: #4361ee;
+    background: rgba(67, 97, 238, 0.1);
+}
+
+/* Safari AI nav link */
+.safari-nav-link {
+    background: linear-gradient(135deg, rgba(67, 97, 238, 0.12), rgba(6, 214, 160, 0.08));
+    border: 1px solid rgba(67, 97, 238, 0.25);
+    color: #4361ee !important;
+    font-weight: 700;
+}
+
+.safari-nav-link:hover,
+.safari-nav-link.active {
+    background: linear-gradient(135deg, rgba(67, 97, 238, 0.2), rgba(6, 214, 160, 0.15)) !important;
+    border-color: rgba(67, 97, 238, 0.4);
+    color: #4361ee !important;
+    box-shadow: 0 0 15px rgba(67, 97, 238, 0.2);
+}
+
+.nav-auth {
+    display: flex;
+    gap: 0.75rem;
+    margin-left: auto;
+    margin-right: 1.5rem;
+}
+
+.auth-btn {
+    padding: 0.6rem 1.25rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.login-btn {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.login-btn:hover {
+    background: rgba(67, 97, 238, 0.1);
+    border-color: rgba(67, 97, 238, 0.3);
+    color: #4361ee;
+}
+
+.register-btn {
+    background: linear-gradient(135deg, #4361ee, #3a0ca3);
+    color: white;
+    border: 1px solid transparent;
+    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+}
+
+.register-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+}
+
+.nav-cta {
+    background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.25);
+    font-family: inherit;
+}
+
+.nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(67, 97, 238, 0.35);
+}
+
+@media (max-width: 1024px) {
+    .nav-links {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 1rem;
+    }
+
+    .nav-auth {
+        margin-right: 0.5rem;
+    }
+
+    .nav-cta {
+        display: none;
+    }
+}
