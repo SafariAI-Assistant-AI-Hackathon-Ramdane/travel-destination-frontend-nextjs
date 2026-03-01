@@ -240,7 +240,7 @@ const SafariSidebar: React.FC<SafariSidebarProps> = ({ onInjectCards, onSendMess
 
   const injectMiniCard = (mc: MiniCard) => {
     const payloads = buildDestinationPayloads([mc.attraction], 1);
-    onInjectCards(payloads, `📍 **${mc.name}** — voici les détails :`);
+    onInjectCards(payloads, ` **${mc.name}** — voici les détails :`);
   };
 
   const MiniCardList: React.FC<{ cards: MiniCard[] }> = ({ cards }) => (

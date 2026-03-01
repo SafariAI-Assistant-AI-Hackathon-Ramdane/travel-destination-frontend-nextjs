@@ -405,3 +405,85 @@
         text-align: center;
     }
 }
+
+.booking-card {
+    background: linear-gradient(135deg, rgba(26, 58, 82, 0.03) 0%, rgba(244, 162, 97, 0.03) 100%);
+    border: 2px solid rgba(26, 58, 82, 0.15);
+    position: sticky;
+    top: 20px;
+}
+
+.booking-description {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.booking-partners {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.partner-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: 2px solid;
+    font-size: 0.95rem;
+}
+
+.partner-btn.tripadvisor {
+    background: white;
+    color: #00AA6C;
+    border-color: #00AA6C;
+}
+
+.partner-btn.tripadvisor:hover {
+    background: #00AA6C;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 170, 108, 0.3);
+}
+
+.partner-btn.booking {
+    background: white;
+    color: #003580;
+    border-color: #003580;
+}
+
+.partner-btn.booking:hover {
+    background: #003580;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 53, 128, 0.3);
+}
+
+.partner-btn.getyourguide {
+    background: white;
+    color: #FF6F00;
+    border-color: #FF6F00;
+}
+
+.partner-btn.getyourguide:hover {
+    background: #FF6F00;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 111, 0, 0.3);
+}
+
+.affiliate-notice {
+    margin-top: 1.5rem;
+    padding: 12px;
+    background: rgba(244, 162, 97, 0.1);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+    border: 1px dashed rgba(244, 162, 97, 0.3);
+}
