@@ -54,7 +54,11 @@ const SafariMessage: React.FC<SafariMessageProps> = ({ message, theme }) => {
 
       <div className={`safari-msg-content ${isUser ? 'user-content' : 'safari-content'}`}>
         <div className={`safari-msg-bubble ${isUser ? 'user-bubble' : 'safari-bubble'}`}>
-          <p>{renderText(message.text)}</p>
+          {isUser ? (
+            <p>{renderText(message.text)}</p>
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: message.text }} />
+          )}
         </div>
 
         {message.cards && message.cards.length > 0 && (

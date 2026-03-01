@@ -33,6 +33,7 @@
     font-size: 0.9rem;
     line-height: 1.5;
     word-break: break-word;
+    white-space: pre-wrap;
 }
 
 .safari-msg-bubble p {
@@ -95,8 +96,43 @@
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Safari HTML Content Styling */
+.safari-bubble .message-heading,
+.safari-bubble h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 8px 0 12px 0;
+}
+
+.safari-bubble .message-list,
+.safari-bubble ul {
+    margin: 0 0 12px 18px;
+    padding: 0;
+    list-style-type: disc;
+}
+
+.safari-bubble li {
+    margin-bottom: 6px;
+}
+
+.safari-bubble p {
+    margin-bottom: 12px;
+}
+
+.safari-bubble p:last-child,
+.safari-bubble ul:last-child {
+    margin-bottom: 0;
+}
+
+.safari-bubble strong {
+    color: var(--primary-dark);
+    font-weight: 600;
 }

@@ -6,6 +6,7 @@ import { detectIntent } from '../lib/intentDetector';
 import { buildPayloadsForIntent, buildDestinationPayloads, CardPayload } from '../lib/cardPayloadBuilder';
 import { attractionService, Attraction } from '../services/attraction.service';
 import { recommendationService } from '../services/recommendation.service';
+import { chatbotService } from '../services/chatbot.service';
 
 export type MessageRole = 'user' | 'safari';
 
@@ -106,31 +107,42 @@ export function useSafariChat(): UseSafariChatReturn {
 
       const intent = detectIntent(text);
 
-      // Simulate small thinking delay (200–700ms)
-      await new Promise((r) => setTimeout(r, 300 + Math.random() * 400));
+      // Start Chatbot Call & Attraction Search in parallel
+      const chatbotPromise = chatbotService.askChatbot(text)
+        .then(res => res.response || res.message || SAFARI_RESPONSES[intent.type] || SAFARI_RESPONSES.unknown)
+        .catch(err => {
+          console.error('Chatbot API error:', err);
+          return SAFARI_RESPONSES[intent.type] || SAFARI_RESPONSES.unknown;
+        });
 
-      // Filter attractions by keywords if any
-      let relevantAttractions = attractionsRef.current;
+      let searchTerm = '';
       if (intent.keywords.length > 0 || intent.location) {
-        const searchTerm = [...intent.keywords, intent.location || ''].join(' ').trim();
-        if (searchTerm) {
-          const filtered = await attractionService.searchAttractions(searchTerm);
-          if (filtered.length > 0) relevantAttractions = filtered;
+        searchTerm = [...intent.keywords, intent.location || ''].join(' ').trim();
+      }
+      
+      const searchPromise = searchTerm 
+        ? attractionService.searchAttractions(searchTerm).catch(() => [] as Attraction[])
+        : Promise.resolve([] as Attraction[]);
+
+      // Await both results
+      const [responseText, filteredAttractions] = await Promise.all([chatbotPromise, searchPromise]);
+
+      // Determine cards
+      let cards: CardPayload[] = [];
+      if (filteredAttractions.length > 0) {
+        // If search returned results, show them regardless of intent type
+        const globalIndices = resolveGlobalIndices(filteredAttractions, attractionsRef.current);
+        cards = buildDestinationPayloads(filteredAttractions, 3, undefined, globalIndices);
+      } else {
+        // Fallback to intent-based cards if no specific search results
+        const relevantAttractions = attractionsRef.current;
+        const globalIndices = resolveGlobalIndices(relevantAttractions, attractionsRef.current);
+        if (intent.type === 'destination' || intent.type === 'recommendation') {
+          cards = buildDestinationPayloads(relevantAttractions, 3, undefined, globalIndices);
+        } else {
+          cards = buildPayloadsForIntent(intent.type, relevantAttractions);
         }
       }
-
-      // Compute global indices for navigation
-      const globalIndices = resolveGlobalIndices(relevantAttractions, attractionsRef.current);
-
-      // Build card payloads with indices
-      let cards: CardPayload[];
-      if (intent.type === 'destination' || intent.type === 'recommendation') {
-        cards = buildDestinationPayloads(relevantAttractions, 3, undefined, globalIndices);
-      } else {
-        cards = buildPayloadsForIntent(intent.type, relevantAttractions);
-      }
-
-      const responseText = SAFARI_RESPONSES[intent.type] || SAFARI_RESPONSES.unknown;
 
       const safariMsg: ChatMessage = {
         id: genId(),
