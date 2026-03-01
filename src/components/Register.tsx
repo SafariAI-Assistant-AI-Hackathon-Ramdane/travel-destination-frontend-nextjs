@@ -5,8 +5,6 @@ import './Login.css'; // Shared styles
 
 function Register() {
   const [formData, setFormData] = useState({
-    firstname: '',
-    lastname: '',
     email: '',
     password: ''
   });
@@ -25,8 +23,13 @@ function Register() {
     setLoading(true);
 
     try {
-      console.log("Sending registration request:", formData);
-      await authService.register(formData);
+      const registerData = {
+        ...formData,
+        firstname: 'Marrakech',
+        lastname: 'Traveler'
+      };
+      console.log("Sending registration request:", registerData);
+      await authService.register(registerData);
       setSuccess(true);
       // Redirect to onboarding for new users
       setTimeout(() => navigate('/onboarding'), 2000);
@@ -74,32 +77,19 @@ function Register() {
         </div>
         
         {error && <div className="auth-error">{error}</div>}
+
+        <button className="google-btn" type="button">
+          <img 
+            src="https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png" 
+            alt="Google" 
+            className="google-icon"
+          />
+          Continue with Google
+        </button>
+
+        <div className="auth-divider">or join with email</div>
         
         <form onSubmit={handleSubmit} className="auth-form">
-          <div className="form-group">
-            <label htmlFor="firstname">First Name</label>
-            <input
-              type="text"
-              id="firstname"
-              value={formData.firstname}
-              onChange={handleChange}
-              placeholder="Enter your first name"
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="lastname">Last Name</label>
-            <input
-              type="text"
-              id="lastname"
-              value={formData.lastname}
-              onChange={handleChange}
-              placeholder="Enter your last name"
-              required
-            />
-          </div>
-          
           <div className="form-group">
             <label htmlFor="email">Email Address</label>
             <input

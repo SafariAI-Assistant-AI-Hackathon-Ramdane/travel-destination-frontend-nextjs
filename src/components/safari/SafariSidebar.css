@@ -9,7 +9,15 @@
     background: white;
     border-left: 2px solid rgba(26, 58, 82, 0.1);
     box-shadow: -4px 0 20px rgba(26, 58, 82, 0.08);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.safari-sidebar.collapsed {
+    width: 0;
+    opacity: 0;
+    pointer-events: none;
+    border-left-width: 0;
+    box-shadow: none;
 }
 
 [data-theme="dark"] .safari-sidebar {
@@ -31,7 +39,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 20px 16px;
+    padding: 14px 16px;
     border-bottom: 2px solid rgba(26, 58, 82, 0.1);
 }
 
@@ -240,4 +248,176 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+/* Quick Questions Modal & Grid */
+.quick-questions-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(26, 58, 82, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 2rem;
+}
+
+.quick-questions-modal {
+    background: white;
+    width: 100%;
+    max-width: 800px;
+    max-height: 90vh;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(26, 58, 82, 0.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 2px solid rgba(26, 58, 82, 0.1);
+}
+
+[data-theme="dark"] .quick-questions-modal {
+    background: #242b33;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.quick-questions-modal-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 2px solid rgba(26, 58, 82, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quick-questions-modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.close-modal-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 1;
+}
+
+.quick-questions-modal-body {
+    padding: 2rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.quick-questions-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.quick-questions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.question-card {
+    background: rgba(26, 58, 82, 0.02);
+    border: 2px solid rgba(26, 58, 82, 0.08);
+    border-radius: 15px;
+    padding: 1.5rem;
+}
+
+.question-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    color: var(--text-main);
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.option-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 0.75rem;
+    background: white;
+    border: 2px solid rgba(26, 58, 82, 0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.option-icon {
+    color: var(--text-muted);
+    transition: transform 0.2s;
+}
+
+.option-btn span {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.option-btn:hover {
+    border-color: var(--primary);
+    background: rgba(26, 58, 82, 0.02);
+    transform: translateY(-2px);
+}
+
+.option-btn.selected {
+    border-color: var(--primary);
+    background: rgba(26, 58, 82, 0.05);
+    box-shadow: 0 4px 12px rgba(26, 58, 82, 0.1);
+}
+
+.option-btn.selected .option-icon {
+    color: var(--primary);
+    transform: scale(1.1);
+}
+
+.quick-questions-actions {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+}
+
+.save-prefs-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 25px rgba(26, 58, 82, 0.2);
+}
+
+.save-prefs-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(26, 58, 82, 0.3);
+    background: var(--primary-dark);
+}
+
+.save-prefs-btn:disabled {
+    background: var(--text-muted);
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
 }

@@ -39,7 +39,33 @@
     gap: 12px;
 }
 
+.safari-sidebar-toggle-btn {
+    background: rgba(26, 58, 82, 0.05);
+    border: 1px solid rgba(26, 58, 82, 0.1);
+    color: var(--text-main);
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.safari-sidebar-toggle-btn:hover {
+    background: rgba(26, 58, 82, 0.1);
+    color: var(--primary);
+    transform: scale(1.05);
+}
+
+.safari-sidebar-toggle-btn.collapsed {
+    color: var(--primary);
+    background: rgba(26, 58, 82, 0.1);
+}
+
 .safari-chat-header-info {
+    /* ... */
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -75,8 +101,15 @@
 }
 
 @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
 }
 
 .safari-chat-header-actions {
@@ -240,6 +273,7 @@
         opacity: 0;
         transform: translateY(-8px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);

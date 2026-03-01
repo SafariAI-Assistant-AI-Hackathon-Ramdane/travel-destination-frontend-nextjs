@@ -78,6 +78,11 @@
     color: var(--primary);
 }
 
+.voice-input-btn {
+    position: relative;
+    /* Spacing between image and send */
+}
+
 .safari-input-send-btn {
     width: 36px;
     height: 36px;

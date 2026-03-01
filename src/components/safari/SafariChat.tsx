@@ -8,7 +8,7 @@ import SafariOnboarding from './SafariOnboarding';
 import SafariAvatar from './SafariAvatar';
 import { CardPayload } from '../../lib/cardPayloadBuilder';
 import { useNavigate } from 'react-router-dom';
-import { Sun, Moon, Globe, Compass, Home, User, LogOut, LogIn } from 'lucide-react';
+import { Sun, Moon, Globe, Compass, Home, User, LogOut, LogIn, PanelLeft } from 'lucide-react';
 import { authService } from '../../services/auth.service';
 
 export type Lang = 'fr' | 'en' | 'ar';
@@ -20,6 +20,8 @@ interface SafariChatProps {
   lang: Lang;
   onLangChange: (lang: Lang) => void;
   onThemeToggle: () => void;
+  onToggleSidebar: () => void;
+  isSidebarVisible: boolean;
 }
 
 const LANG_LABELS: Record<Lang, string> = { fr: 'FR', en: 'EN', ar: 'عر' };
@@ -31,6 +33,8 @@ const SafariChat: React.FC<SafariChatProps> = ({
   lang,
   onLangChange,
   onThemeToggle,
+  onToggleSidebar,
+  isSidebarVisible,
 }) => {
   const {
     messages,
@@ -72,6 +76,13 @@ const SafariChat: React.FC<SafariChatProps> = ({
     <div className={`safari-chat ${lang === 'ar' ? 'rtl' : 'ltr'}`}>
       <div className="safari-chat-header">
         <div className="safari-chat-header-left">
+          <button 
+            className="safari-sidebar-toggle-btn"
+            onClick={onToggleSidebar}
+            title={isSidebarVisible ? 'Close Sidebar' : 'Open Sidebar'}
+          >
+            <PanelLeft size={20} />
+          </button>
           <SafariAvatar size={38} showPulse />
           <div className="safari-chat-header-info">
             <h2 className="safari-chat-name">Safari <span className="safari-chat-globe">🌍</span></h2>

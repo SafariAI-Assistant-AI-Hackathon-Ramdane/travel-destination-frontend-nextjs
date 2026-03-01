@@ -70,15 +70,16 @@ function OnboardingPage() {
       
       console.log("Onboarding ratings saved:", ratingsArray);
 
-      // Optionally try to get profile if logged in, but don't fail if not
-      try {
-        if (authService.isAuthenticated()) {
-          const profile = await authService.getProfile();
-          console.log("User profile found:", profile.email);
-          // Here you would typically send ratings to backend if user is logged in
+      // Send to backend if authenticated
+      if (authService.isAuthenticated()) {
+        try {
+          await authService.updatePreferences({
+            ratings: ratingsArray
+          });
+          console.log("Onboarding ratings synced with backend");
+        } catch (backendErr) {
+          console.error("Failed to sync onboarding ratings with backend", backendErr);
         }
-      } catch (profileErr) {
-        console.warn("Could not get user profile, but ratings saved locally", profileErr);
       }
       
       navigate('/');

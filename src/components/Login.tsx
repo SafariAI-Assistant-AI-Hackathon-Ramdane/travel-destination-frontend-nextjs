@@ -34,6 +34,17 @@ function Login() {
         </div>
         
         {error && <div className="auth-error">{error}</div>}
+
+        <button className="google-btn" type="button">
+          <img 
+            src="https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png" 
+            alt="Google" 
+            className="google-icon"
+          />
+          Continue with Google
+        </button>
+
+        <div className="auth-divider">or login with email</div>
         
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">

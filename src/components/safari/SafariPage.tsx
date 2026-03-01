@@ -10,6 +10,7 @@ const SafariPage: React.FC = () => {
   const themeRef = useRef<'dark' | 'light'>('light');
   const [lang, setLang] = useState<Lang>('fr');
   const [themeState, setThemeState] = useState<'dark' | 'light'>('light');
+  const [showSidebar, setShowSidebar] = useState(true);
 
   // Initialize theme on mount
   React.useEffect(() => {
@@ -38,6 +39,10 @@ const SafariPage: React.FC = () => {
     document.documentElement.setAttribute('data-theme', newTheme);
   }, [themeState]);
 
+  const handleToggleSidebar = useCallback(() => {
+    setShowSidebar(prev => !prev);
+  }, []);
+
   return (
     <div className={`safari-page ${lang === 'ar' ? 'safari-rtl' : ''}`} data-theme={themeState}>
       {/* Ambient background orbs */}
@@ -48,7 +53,12 @@ const SafariPage: React.FC = () => {
       <div className="safari-layout">
         {/* Sidebar on LEFT for FR/EN (before chat), on RIGHT for AR (after chat) */}
         {lang !== 'ar' && (
-          <SafariSidebar onInjectCards={handleInjectCards} onSendMessage={handleSendMessage} lang={lang} />
+          <SafariSidebar 
+            onInjectCards={handleInjectCards} 
+            onSendMessage={handleSendMessage} 
+            lang={lang} 
+            isVisible={showSidebar}
+          />
         )}
 
         <SafariChat
@@ -58,10 +68,17 @@ const SafariPage: React.FC = () => {
           lang={lang}
           onLangChange={setLang}
           onThemeToggle={handleThemeToggle}
+          onToggleSidebar={handleToggleSidebar}
+          isSidebarVisible={showSidebar}
         />
 
         {lang === 'ar' && (
-          <SafariSidebar onInjectCards={handleInjectCards} onSendMessage={handleSendMessage} lang={lang} />
+          <SafariSidebar 
+            onInjectCards={handleInjectCards} 
+            onSendMessage={handleSendMessage} 
+            lang={lang} 
+            isVisible={showSidebar}
+          />
         )}
       </div>
     </div>

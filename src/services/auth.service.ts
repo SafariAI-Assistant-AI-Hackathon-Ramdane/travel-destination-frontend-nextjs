@@ -41,5 +41,9 @@ export const authService = {
 
     isAuthenticated: (): boolean => {
         return !!Cookies.get('auth_token');
+    },
+
+    updatePreferences: async (preferences: any): Promise<void> => {
+        await api.put('/auth/preferences', preferences);
     }
 };

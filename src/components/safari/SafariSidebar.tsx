@@ -4,7 +4,8 @@ import { recommendationService } from '../../services/recommendation.service';
 import { attractionService, Attraction } from '../../services/attraction.service';
 import { authService } from '../../services/auth.service';
 import { buildDestinationPayloads, CardPayload } from '../../lib/cardPayloadBuilder';
-import { Search, Camera, Users, Star, ChevronDown, ChevronUp } from 'lucide-react';
+import { Search, Camera, Users, Star, ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
+import QuickQuestions from '../QuickQuestions';
 
 type Lang = 'fr' | 'en' | 'ar';
 
@@ -12,6 +13,7 @@ interface SafariSidebarProps {
   onInjectCards: (cards: CardPayload[], text: string) => void;
   onSendMessage?: (text: string) => void;
   lang: Lang;
+  isVisible?: boolean;
 }
 
 const T: Record<string, Record<Lang, string>> = {
@@ -20,7 +22,7 @@ const T: Record<string, Record<Lang, string>> = {
   reco: { fr: 'Mes Recommandations', en: 'My Recommendations', ar: 'توصياتي' },
   search: { fr: 'Recherche par titre', en: 'Search by title', ar: 'البحث بالعنوان' },
   image: { fr: 'Recherche par image', en: 'Search by image', ar: 'البحث بالصورة' },
-  similar: { fr: 'Voyageurs similaires', en: 'Similar travelers', ar: 'مسافرون مشابهون' },
+  similar: { fr: 'Questions Rapides', en: 'Quick Questions', ar: 'أسئلة سريعة' },
   categories: { fr: 'Catégories', en: 'Categories', ar: 'فئات' },
   restaurants: { fr: 'Restaurants', en: 'Restaurants', ar: 'مطاعم' },
   family: { fr: 'Famille', en: 'Family', ar: 'عائلي' },
@@ -31,7 +33,9 @@ const T: Record<string, Record<Lang, string>> = {
   searching: { fr: 'Recherche...', en: 'Searching...', ar: '...يبحث' },
   upload: { fr: 'Uploader une photo', en: 'Upload a photo', ar: 'تحميل صورة' },
   analyzing: { fr: 'Analyse en cours...', en: 'Analyzing...', ar: '...جاري التحليل' },
-  similarLabel: { fr: 'Les voyageurs comme vous ont aimé...', en: 'Travelers like you loved...', ar: '...مسافرون مثلك أحبوا' },
+  similarLabel: { fr: 'Questions Rapides', en: 'Quick Questions', ar: 'أسئلة سريعة' },
+  quickQuestionsCta: { fr: 'Répondre aux questions rapides', en: 'Answer Quick Questions', ar: 'الإجابة على الأسئلة السريعة' },
+  quickQuestionsText: { fr: 'Aidez-nous à personnaliser vos recommandations en répondant à quelques questions.', en: 'Help us personalize your recommendations by answering a few questions.', ar: 'ساعدنا في تخصيص توصياتك من خلال الإجابة على بعض الأسئلة.' },
 };
 
 interface MiniCard {
@@ -59,7 +63,7 @@ function AttractionToMiniCard(attr: Attraction): MiniCard {
   };
 }
 
-const SafariSidebar: React.FC<SafariSidebarProps> = ({ onInjectCards, onSendMessage, lang }) => {
+const SafariSidebar: React.FC<SafariSidebarProps> = ({ onInjectCards, onSendMessage, lang, isVisible = true }) => {
   const [openSection, setOpenSection] = useState<string>('reco');
   const [recoCards, setRecoCards] = useState<MiniCard[]>([]);
   const [recoLoading, setRecoLoading] = useState(false);
@@ -74,6 +78,55 @@ const SafariSidebar: React.FC<SafariSidebarProps> = ({ onInjectCards, onSendMess
 
   const [similarCards, setSimilarCards] = useState<MiniCard[]>([]);
   const [similarLoaded, setSimilarLoaded] = useState(false);
+  
+  const [showQuickQuestions, setShowQuickQuestions] = useState(false);
+  const [preferences, setPreferences] = useState<Record<string, string>>(() => {
+    const saved = localStorage.getItem('onboarding_preferences');
+    return saved ? JSON.parse(saved) : {};
+  });
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handlePreferenceChange = (id: string, value: string) => {
+    setPreferences(prev => ({ ...prev, [id]: value }));
+  };
+
+  const handleSavePreferences = async () => {
+    setIsSaving(true);
+    try {
+      localStorage.setItem('onboarding_preferences', JSON.stringify(preferences));
+      if (authService.isAuthenticated()) {
+        await authService.updatePreferences(preferences);
+      }
+      
+      // Construct a descriptive prompt for recommendations
+      const p = preferences;
+      const travelStyleMap: any = { solo: 'seul(e)', couple: 'en couple', family: 'en famille', friends: 'entre amis' };
+      const interestMap: any = { culture: 'la culture et l\'histoire', food: 'la gastronomie', nature: 'la nature', shopping: 'le shopping' };
+      const budgetMap: any = { budget: 'économique', standard: 'moyen', luxury: 'de luxe' };
+      const paceMap: any = { slow: 'détendu', moderate: 'modéré', fast: 'intense' };
+      const durationMap: any = { weekend: 'un week-end', week: 'une semaine', long: 'plus de 10 jours' };
+      const purposeMap: any = { discovery: 'la découverte', relax: 'le repos', photo: 'la photographie' };
+
+      let prompt = "Bonjour ! J'ai mis à jour mes préférences de voyage. ";
+      prompt += `Je voyage ${travelStyleMap[p.travelStyle] || 'au Maroc'} avec un intérêt particulier pour ${interestMap[p.interests] || 'la découverte'}. `;
+      prompt += `Mon budget est ${budgetMap[p.budget] || 'standard'} et je préfère un rythme ${paceMap[p.pace] || 'modéré'}. `;
+      prompt += `Je prévois de rester ${durationMap[p.duration] || 'quelques jours'} pour ${purposeMap[p.purpose] || 'visiter'}. `;
+      prompt += "Peux-tu me recommander des attractions ou activités à Marrakech qui correspondent à ce profil ? ✨";
+
+      // Send the prompt to the chatbot
+      if (onSendMessage) {
+        onSendMessage(prompt);
+      }
+
+      // Re-load recommendations to reflect new preferences in the sidebar too
+      await loadRecommendations();
+      setShowQuickQuestions(false);
+    } catch (err) {
+      console.error("Failed to save preferences", err);
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   const toggle = (key: string) =>
     setOpenSection((prev) => (prev === key ? '' : key));
@@ -264,7 +317,7 @@ const SafariSidebar: React.FC<SafariSidebarProps> = ({ onInjectCards, onSendMess
   );
 
   return (
-    <aside className="safari-sidebar">
+    <aside className={`safari-sidebar ${isVisible ? '' : 'collapsed'}`}>
       {/* Header */}
       <div className="safari-sidebar-header">
         <span className="safari-sidebar-globe">🌍</span>
@@ -349,33 +402,49 @@ const SafariSidebar: React.FC<SafariSidebarProps> = ({ onInjectCards, onSendMess
         )}
       </div>
 
-      {/* Section 4 — Similar users */}
+      {/* Section 4 — Quick Questions */}
       <div className="safari-sidebar-section">
         <button
           className="safari-sidebar-section-toggle"
-          onClick={() => {
-            toggle('similar');
-            loadSimilarUsers();
-          }}
+          onClick={() => toggle('similar')}
         >
-          <Users size={14} />
+          <HelpCircle size={14} />
           <span>{T.similar[lang]}</span>
           {openSection === 'similar' ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
         </button>
 
         {openSection === 'similar' && (
           <div className="safari-sidebar-content">
-            {!similarLoaded ? (
-              <div className="safari-sidebar-spinner">{T.loading[lang]} 👥</div>
-            ) : (
-              <>
-                <p className="safari-sidebar-label">{T.similarLabel[lang]}</p>
-                <MiniCardList cards={similarCards} />
-              </>
-            )}
+            <p className="safari-sidebar-label">{T.quickQuestionsText[lang]}</p>
+            <button 
+              className="safari-sidebar-cta" 
+              onClick={() => setShowQuickQuestions(true)}
+            >
+              ✨ {T.quickQuestionsCta[lang]}
+            </button>
           </div>
         )}
       </div>
+
+      {/* Modal Overlay for Quick Questions */}
+      {showQuickQuestions && (
+        <div className="quick-questions-overlay" onClick={() => setShowQuickQuestions(false)}>
+          <div className="quick-questions-modal" onClick={e => e.stopPropagation()}>
+            <div className="quick-questions-modal-header">
+              <h2>Questions Rapides</h2>
+              <button className="close-modal-btn" onClick={() => setShowQuickQuestions(false)}>×</button>
+            </div>
+            <div className="quick-questions-modal-body">
+              <QuickQuestions 
+                preferences={preferences}
+                onPreferenceChange={handlePreferenceChange}
+                onSave={handleSavePreferences}
+                isSaving={isSaving}
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Section 5 — Categories */}
       <div className="safari-sidebar-section">

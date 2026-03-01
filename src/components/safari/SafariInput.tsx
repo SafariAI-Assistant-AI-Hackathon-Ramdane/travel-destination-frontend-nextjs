@@ -1,6 +1,7 @@
 import React, { useState, useRef, KeyboardEvent } from 'react';
 import './SafariInput.css';
 import { Send, Camera } from 'lucide-react';
+import VoiceInput from './VoiceInput';
 
 interface SafariInputProps {
   onSend: (text: string) => void;
@@ -55,6 +56,9 @@ const SafariInput: React.FC<SafariInputProps> = ({ onSend, onImageUpload, disabl
           >
             <Camera size={18} />
           </button>
+          
+          <VoiceInput disabled={disabled} />
+
           <button
             className="safari-input-send-btn"
             onClick={handleSend}
