@@ -19,15 +19,17 @@ function App() {
       <div className="App">
         <Navbar />
         <Routes>
-          {/* Safari is the main interface — default homepage */}
-          <Route path="/" element={<SafariPage />} />
-          <Route path="/safari" element={<Navigate to="/" replace />} />
+          {/* Home is the main page */}
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          
+          {/* Safari AI Chat */}
+          <Route path="/safari" element={<SafariPage />} />
 
           {/* Map page */}
           <Route path="/map" element={<MapPage />} />
 
-          {/* Existing pages — all preserved */}
-          <Route path="/home" element={<Home />} />
+          {/* Other pages */}
           <Route path="/attractions" element={<AttractionsPage />} />
           <Route path="/attraction/:id" element={<AttractionDetails />} />
           <Route path="/login" element={<Login />} />

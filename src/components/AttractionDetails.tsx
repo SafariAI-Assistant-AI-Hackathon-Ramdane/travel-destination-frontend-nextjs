@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import BackButton from './BackButton';
 import { parseCSV } from '../utils/csvLoader';
 import './AttractionDetails.css';
 
@@ -121,7 +122,7 @@ const AttractionDetails: React.FC = () => {
 
   return (
     <div className="details-container">
-      <button className="back-btn" onClick={() => navigate('/')}>← Retour à Safari</button>
+      <BackButton />
       
       <div className="details-header">
         <h1>{attraction.attraction_name}</h1>

@@ -7,13 +7,13 @@ import { CardPayload } from '../../lib/cardPayloadBuilder';
 const SafariPage: React.FC = () => {
   const injectRef = useRef<((cards: CardPayload[], text: string) => void) | null>(null);
   const sendMessageRef = useRef<((text: string) => void) | null>(null);
-  const themeRef = useRef<'dark' | 'light'>('dark');
+  const themeRef = useRef<'dark' | 'light'>('light');
   const [lang, setLang] = useState<Lang>('fr');
-  const [themeState, setThemeState] = useState<'dark' | 'light'>('dark');
+  const [themeState, setThemeState] = useState<'dark' | 'light'>('light');
 
   // Initialize theme on mount
   React.useEffect(() => {
-    document.documentElement.setAttribute('data-theme', themeState);
+    document.documentElement.setAttribute('data-theme', 'light');
   }, []);
 
   const registerInject = useCallback((fn: (cards: CardPayload[], text: string) => void) => {

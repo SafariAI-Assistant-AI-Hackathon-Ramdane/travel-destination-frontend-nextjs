@@ -96,10 +96,6 @@ const SafariChat: React.FC<SafariChatProps> = ({
             ))}
           </div>
 
-          <button className="safari-header-icon-btn" onClick={handleThemeToggle} title="Toggle theme">
-            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
-
           {isLoggedIn ? (
             <>
               <button className="safari-header-icon-btn" onClick={() => navigate('/profile')} title="Profile">
