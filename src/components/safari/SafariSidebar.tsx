@@ -24,11 +24,14 @@ const T: Record<string, Record<Lang, string>> = {
   image: { fr: 'Recherche par image', en: 'Search by image', ar: 'البحث بالصورة' },
   similar: { fr: 'Questions Rapides', en: 'Quick Questions', ar: 'أسئلة سريعة' },
   categories: { fr: 'Catégories', en: 'Categories', ar: 'فئات' },
-  restaurants: { fr: 'Restaurants', en: 'Restaurants', ar: 'مطاعم' },
-  family: { fr: 'Famille', en: 'Family', ar: 'عائلي' },
-  romantic: { fr: 'Romantique', en: 'Romantic', ar: 'رومانسي' },
+  monuments: { fr: 'Monuments', en: 'Monuments', ar: 'معالم' },
+  nature: { fr: 'Nature', en: 'Nature', ar: 'طبيعة' },
+  wellness: { fr: 'Bien-être', en: 'Wellness', ar: 'رفاهية' },
+  activities: { fr: 'Activités', en: 'Activities', ar: 'أنشطة' },
+  shopping: { fr: 'Shopping', en: 'Shopping', ar: 'تسوق' },
+  culture: { fr: 'Culture', en: 'Culture', ar: 'ثقافة' },
   loading: { fr: 'Chargement...', en: 'Loading...', ar: '...جاري التحميل' },
-  loadReco: { fr: '✨ Charger mes recommandations', en: '✨ Load my recommendations', ar: '✨ تحميل توصياتي' },
+  loadReco: { fr: 'Charger mes recommandations', en: 'Load my recommendations', ar: 'تحميل توصياتي' },
   searchPlaceholder: { fr: 'Jardin, Palais, Souk...', en: 'Garden, Palace, Souk...', ar: '...حديقة، قصر، سوق' },
   searching: { fr: 'Recherche...', en: 'Searching...', ar: '...يبحث' },
   upload: { fr: 'Uploader une photo', en: 'Upload a photo', ar: 'تحميل صورة' },
@@ -78,7 +81,7 @@ const SafariSidebar: React.FC<SafariSidebarProps> = ({ onInjectCards, onSendMess
 
   const [similarCards, setSimilarCards] = useState<MiniCard[]>([]);
   const [similarLoaded, setSimilarLoaded] = useState(false);
-  
+
   const [showQuickQuestions, setShowQuickQuestions] = useState(false);
   const [preferences, setPreferences] = useState<Record<string, string>>(() => {
     const saved = localStorage.getItem('onboarding_preferences');
@@ -97,7 +100,7 @@ const SafariSidebar: React.FC<SafariSidebarProps> = ({ onInjectCards, onSendMess
       if (authService.isAuthenticated()) {
         await authService.updatePreferences(preferences);
       }
-      
+
       // Construct a descriptive prompt for recommendations
       const p = preferences;
       const travelStyleMap: any = { solo: 'seul(e)', couple: 'en couple', family: 'en famille', friends: 'entre amis' };
@@ -344,7 +347,7 @@ const SafariSidebar: React.FC<SafariSidebarProps> = ({ onInjectCards, onSendMess
         {openSection === 'reco' && (
           <div className="safari-sidebar-content">
             {recoLoading ? (
-              <div className="safari-sidebar-spinner">{T.loading[lang]} ✨</div>
+              <div className="safari-sidebar-spinner">{T.loading[lang]}</div>
             ) : recoCards.length === 0 ? (
               <button className="safari-sidebar-cta" onClick={loadRecommendations}>
                 {T.loadReco[lang]}
@@ -416,11 +419,11 @@ const SafariSidebar: React.FC<SafariSidebarProps> = ({ onInjectCards, onSendMess
         {openSection === 'similar' && (
           <div className="safari-sidebar-content">
             <p className="safari-sidebar-label">{T.quickQuestionsText[lang]}</p>
-            <button 
-              className="safari-sidebar-cta" 
+            <button
+              className="safari-sidebar-cta"
               onClick={() => setShowQuickQuestions(true)}
             >
-              ✨ {T.quickQuestionsCta[lang]}
+              {T.quickQuestionsCta[lang]}
             </button>
           </div>
         )}
@@ -435,7 +438,7 @@ const SafariSidebar: React.FC<SafariSidebarProps> = ({ onInjectCards, onSendMess
               <button className="close-modal-btn" onClick={() => setShowQuickQuestions(false)}>×</button>
             </div>
             <div className="quick-questions-modal-body">
-              <QuickQuestions 
+              <QuickQuestions
                 preferences={preferences}
                 onPreferenceChange={handlePreferenceChange}
                 onSave={handleSavePreferences}
@@ -449,21 +452,29 @@ const SafariSidebar: React.FC<SafariSidebarProps> = ({ onInjectCards, onSendMess
       {/* Section 5 — Categories */}
       <div className="safari-sidebar-section">
         <button className="safari-sidebar-section-toggle" onClick={() => toggle('categories')}>
-          <span>🎯</span>
           <span>{T.categories[lang]}</span>
           {openSection === 'categories' ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
         </button>
 
         {openSection === 'categories' && (
           <div className="safari-sidebar-content">
-            <button className="safari-sidebar-cta" onClick={() => onSendMessage?.(lang === 'ar' ? 'أفضل المطاعم في مراكش' : lang === 'en' ? 'Best restaurants in Marrakech' : 'Meilleurs restaurants à Marrakech')}>
-              🍽️ {T.restaurants[lang]}
+            <button className="safari-sidebar-cta" onClick={() => onSendMessage?.(lang === 'ar' ? 'معالم ومواقع تاريخية' : lang === 'en' ? 'Monuments & Historic Sites' : 'Monuments & Sites Historiques')}>
+               {T.monuments[lang]}
             </button>
-            <button className="safari-sidebar-cta" onClick={() => onSendMessage?.(lang === 'ar' ? 'أنشطة عائلية' : lang === 'en' ? 'Family activities' : 'Activités familiales')}>
-              👨👩👧 {T.family[lang]}
+            <button className="safari-sidebar-cta" onClick={() => onSendMessage?.(lang === 'ar' ? 'طبيعة وأنشطة خارجية' : lang === 'en' ? 'Nature & Outdoor Activities' : 'Nature & Plein Air')}>
+               {T.nature[lang]}
             </button>
-            <button className="safari-sidebar-cta" onClick={() => onSendMessage?.(lang === 'ar' ? 'أماكن رومانسية' : lang === 'en' ? 'Romantic places' : 'Lieux romantiques')}>
-              💑 {T.romantic[lang]}
+            <button className="safari-sidebar-cta" onClick={() => onSendMessage?.(lang === 'ar' ? 'سبا واسترخاء' : lang === 'en' ? 'Spa & Wellness' : 'Bien-être & Relaxation')}>
+               {T.wellness[lang]}
+            </button>
+            <button className="safari-sidebar-cta" onClick={() => onSendMessage?.(lang === 'ar' ? 'جولات وأنشطة' : lang === 'en' ? 'Tours & Activities' : 'Visites & Activités')}>
+               {T.activities[lang]}
+            </button>
+            <button className="safari-sidebar-cta" onClick={() => onSendMessage?.(lang === 'ar' ? 'تسوق وصناعة تقليدية' : lang === 'en' ? 'Shopping & Handicrafts' : 'Shopping & Artisanat')}>
+               {T.shopping[lang]}
+            </button>
+            <button className="safari-sidebar-cta" onClick={() => onSendMessage?.(lang === 'ar' ? 'فن وثقافة' : lang === 'en' ? 'Art & Culture' : 'Art & Culture')}>
+               {T.culture[lang]}
             </button>
           </div>
         )}
