@@ -226,10 +226,45 @@ const AttractionDetails: React.FC = () => {
         </div>
 
         <div className="sidebar-info">
-            <div className="info-card">
-                <h3>Information</h3>
-                <p><strong> Address:</strong> {attraction.address}</p>
-                <p><strong> Price:</strong> {attraction.price || "Contact for price"}</p>
+            <div className="info-card booking-card">
+                <h3>📅 Réserver cette expérience</h3>
+                <p className="booking-description">Réservez en toute confiance avec nos partenaires de confiance</p>
+                <div className="booking-partners">
+                    <a 
+                        href={`https://www.tripadvisor.com/Search?q=${encodeURIComponent(attraction.attraction_name + ' Marrakech')}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="partner-btn tripadvisor"
+                    >
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path d="M12.006 4.295c-2.67 0-5.338.784-7.645 2.353H1.058l1.23 1.23c-1.256 1.47-2.023 3.378-2.023 5.466 0 4.558 3.684 8.242 8.242 8.242 2.126 0 4.06-.81 5.52-2.134 1.46 1.324 3.394 2.134 5.52 2.134 4.558 0 8.242-3.684 8.242-8.242 0-2.088-.767-3.996-2.023-5.466l1.23-1.23h-3.303c-2.307-1.57-4.975-2.353-7.645-2.353zm-3.748 6.778c1.73 0 3.133 1.403 3.133 3.133s-1.403 3.133-3.133 3.133-3.133-1.403-3.133-3.133 1.403-3.133 3.133-3.133zm7.496 0c1.73 0 3.133 1.403 3.133 3.133s-1.403 3.133-3.133 3.133-3.133-1.403-3.133-3.133 1.403-3.133 3.133-3.133zm-7.496 1.56c-.868 0-1.573.705-1.573 1.573s.705 1.573 1.573 1.573 1.573-.705 1.573-1.573-.705-1.573-1.573-1.573zm7.496 0c-.868 0-1.573.705-1.573 1.573s.705 1.573 1.573 1.573 1.573-.705 1.573-1.573-.705-1.573-1.573-1.573z"/>
+                        </svg>
+                        Voir sur TripAdvisor
+                    </a>
+                    <a 
+                        href={`https://www.booking.com/search.html?ss=${encodeURIComponent(attraction.attraction_name + ' Marrakech')}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="partner-btn booking"
+                    >
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path d="M22.5 0h-21C.673 0 0 .673 0 1.5v21c0 .827.673 1.5 1.5 1.5h21c.827 0 1.5-.673 1.5-1.5v-21c0-.827-.673-1.5-1.5-1.5zm-8.417 17.25h-2.166v-6.75h2.166v6.75zm-1.083-7.667c-.692 0-1.25-.558-1.25-1.25s.558-1.25 1.25-1.25 1.25.558 1.25 1.25-.558 1.25-1.25 1.25zm8.417 7.667h-2.167v-3.292c0-.808-.015-1.848-1.125-1.848-1.127 0-1.3.88-1.3 1.788v3.352h-2.166v-6.75h2.078v.922h.03c.29-.548.998-1.125 2.053-1.125 2.194 0 2.597 1.444 2.597 3.322v3.631z"/>
+                        </svg>
+                        Réserver sur Booking.com
+                    </a>
+                    <a 
+                        href={`https://www.getyourguide.com/s/?q=${encodeURIComponent(attraction.attraction_name + ' Marrakech')}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="partner-btn getyourguide"
+                    >
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        GetYourGuide
+                    </a>
+                </div>
+                <p className="affiliate-notice">💡 En réservant via ces liens, vous soutenez Safari</p>
             </div>
         </div>
       </div>
