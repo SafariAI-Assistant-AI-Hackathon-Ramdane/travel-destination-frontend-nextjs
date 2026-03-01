@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './MapPage.css';
-import { ArrowLeft, MapPin } from 'lucide-react';
+import BackButton from './BackButton';
 
 // Fix Leaflet default marker icon issue
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -44,13 +44,10 @@ const MapPage: React.FC = () => {
   return (
     <div className="map-page">
       <div className="map-header">
-        <button className="map-back-btn" onClick={() => navigate(-1)}>
-          <ArrowLeft size={20} />
-          Retour
-        </button>
+        <BackButton />
         <div className="map-info">
           <h2>{name}</h2>
-          <p><MapPin size={14} /> {address}</p>
+          <p>{address}</p>
         </div>
       </div>
       

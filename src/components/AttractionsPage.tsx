@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AttractionCard from './AttractionCard';
+import BackButton from './BackButton';
 import { Search, Camera, MapPin } from 'lucide-react';
 import { attractionService, Attraction } from '../services/attraction.service';
 import { recommendationService } from '../services/recommendation.service';
@@ -179,6 +180,7 @@ function AttractionsPage() {
 
   return (
     <div className="attractions-page">
+      <BackButton />
       <header className="page-header">
           <div className="header-title-group">
               <h1>Explore Marrakech</h1>

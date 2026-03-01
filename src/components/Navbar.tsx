@@ -19,7 +19,7 @@ function Navbar() {
   };
 
   // Hide navbar on Safari page — Safari has its own header
-  if (location.pathname === '/' || location.pathname === '/safari') {
+  if (location.pathname === '/safari') {
     return null;
   }
 
@@ -29,9 +29,7 @@ function Navbar() {
           <span className="logo-icon"><img src="./logo/logo_rs_project.png" width={40} height={40} alt="" /></span>
           <span className="logo-text">Safari<span className="highlight">AI</span></span>
       </div>
-      <div className="nav-links">
-          <Link to="/" className="nav-item safari-nav-link">← Retour à Safari</Link>
-      </div>
+
       <div className="nav-auth">
           {isLoggedIn ? (
             <>

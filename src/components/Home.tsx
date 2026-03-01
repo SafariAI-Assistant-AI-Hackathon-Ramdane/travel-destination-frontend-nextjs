@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Sparkles, TrendingUp, ChevronRight } from 'lucide-react';
 import { attractionService, Attraction } from '../services/attraction.service';
 import { recommendationService } from '../services/recommendation.service';
 import { authService } from '../services/auth.service';
 import AttractionCard from './AttractionCard';
 import './Home.css';
+
+const HERO_IMAGES = [
+  'https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=800&q=80', // Koutoubia Marrakech
+  'https://as2.ftcdn.net/v2/jpg/03/54/25/17/1000_F_354251755_2YROVdpqfiZoHOljn1RKG9mloJUuLzYD.jpg', // Imlil nature
+  'https://th.bing.com/th/id/OIP.4juDccnZ_ByYtBLw9u_v8QHaFc?w=246&h=181&c=7&r=0&o=7&dpr=1.7&pid=1.7&rm=3', // Safi
+  'https://th.bing.com/th/id/OIP.J-IU7TWfP8V7thWbjUGXOgHaE7?w=306&h=204&c=7&r=0&o=7&dpr=1.7&pid=1.7&rm=3'  // Essaouira
+];
 
 function Home() {
   const navigate = useNavigate();
@@ -13,6 +19,14 @@ function Home() {
   const [personalizedAttractions, setPersonalizedAttractions] = useState<Attraction[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const fetchRecommendations = async () => {
@@ -101,17 +115,26 @@ function Home() {
     <div className="home-container">
       {/* Hero Section */}
       <header className="hero-section">
+        <div className="hero-overlay"></div>
         <div className="hero-content">
             <div className="hero-badge">Discover Marrakech-Safi Region</div>
-            <h1 className="hero-title">Explore the Heart of <br/><span className="gradient-text">Marrakech-Safi</span></h1>
-            <p className="hero-subtitle">From the vibrant souks of Marrakech to the coastal beauty of Safi and Essaouira - discover authentic Morocco.</p>
-            <button className="hero-cta-button" onClick={() => navigate('/attractions')}>
-                Explore Attractions
-                <span className="arrow-icon">→</span>
-            </button>
+            <h1 className="hero-title">Explore the Heart of <br/><span className="gradient-text">Morocco</span></h1>
+            <p className="hero-subtitle">From the vibrant souks of Marrakech to the coastal beauty of Safi and Essaouira - discover authentic Morocco with AI-powered recommendations.</p>
+            <div className="hero-actions">
+              <button className="hero-cta-button primary" onClick={() => navigate('/attractions')}>
+                  Explore Attractions
+              </button>
+              <button className="hero-cta-button secondary" onClick={() => navigate('/safari')}>
+                  Try Safari AI
+              </button>
+            </div>
         </div>
-        <div className="hero-visual">
-           <img className="hero-image" src="./marrakech_travel.jpg" width={500} height={400} alt="Marrakech landscape"/>
+        <div className="hero-image-container">
+           <img 
+             className="hero-image" 
+             src={HERO_IMAGES[currentImageIndex]} 
+             alt="Marrakech"
+           />
         </div>
       </header>
 
@@ -122,14 +145,13 @@ function Home() {
             <div className="section-header">
               <div className="header-text">
                 <div className="ai-badge">
-                  <Sparkles size={16} />
                   <span>AI Personalized For You</span>
                 </div>
                 <h2>Magic Matches</h2>
                 <p>Curated destinations based on your travel history and preferences.</p>
               </div>
               <Link to="/attractions" className="view-all-link">
-                View all <ChevronRight size={20} />
+                View all
               </Link>
             </div>
             <div className="recommendations-grid">
@@ -154,14 +176,13 @@ function Home() {
           <div className="section-header">
             <div className="header-text">
               <div className="ai-badge" style={{background: 'linear-gradient(135deg, #d97706 0%, #b45309 100%)'}}>
-                <TrendingUp size={16} />
                 <span>Most Loved in Marrakech-Safi</span>
               </div>
               <h2>Trending Experiences</h2>
               <p>Join thousands of travelers exploring these top-rated local gems.</p>
             </div>
             <Link to="/attractions" className="view-all-link">
-              Explore more <ChevronRight size={20} />
+              Explore more
             </Link>
           </div>
           <div className="recommendations-grid">
@@ -189,7 +210,7 @@ function Home() {
       <footer className="footer">
           <div className="footer-content">
             <p>© 2024 MarrakechTrips. Your AI-Powered Travel Guide.</p>
-            <div className="footer-tagline">Made with ✨ for Marrakech-Safi Region</div>
+            <div className="footer-tagline">Made for Marrakech-Safi Region</div>
           </div>
       </footer>
     </div>

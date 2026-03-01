@@ -74,7 +74,7 @@ function resolveGlobalIndices(subset: Attraction[], allAttractions: Attraction[]
 export function useSafariChat(): UseSafariChatReturn {
   const [messages, setMessages] = useState<ChatMessage[]>([WELCOME_MESSAGE]);
   const [isTyping, setIsTyping] = useState(false);
-  const [theme, setTheme] = useState<Theme>('dark');
+  const [theme, setTheme] = useState<Theme>('light');
   const [isOnboarded] = useState<boolean>(() => {
     return localStorage.getItem('safari_onboarding') !== null ||
       localStorage.getItem('onboarding_completed') === 'true';
